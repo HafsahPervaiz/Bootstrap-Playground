@@ -3,6 +3,7 @@
 > A gamified, interactive, single-page learning platform for mastering Bootstrap 5 — built for the **CAP916: Front-End Web UI Frameworks & Tools** university course.
 
 ---
+<img width="1555" height="812" alt="image" src="https://github.com/user-attachments/assets/0aa4342a-72cc-4521-a6ee-e235f6095b85" />
 
 ## 📸 Overview
 
