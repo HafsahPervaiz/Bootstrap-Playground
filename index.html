@@ -1,263 +1,271 @@
 <!DOCTYPE html>
 <html lang="en" data-bs-theme="dark">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bootstrap Playground — Learn by Doing</title>
-    <meta name="description" content="An interactive, playful playground to learn Bootstrap 5, HTML, CSS and web technologies hands-on.">
+    <meta name="description"
+        content="An interactive playground to learn Bootstrap 5 and web technologies. Covers the complete CAP916 syllabus.">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
+
     <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg fixed-top glass-nav" id="mainNav">
+    <nav class="navbar navbar-expand-lg fixed-top bg-dark border-bottom border-secondary">
         <div class="container-fluid px-4">
-            <a class="navbar-brand fw-800" href="#">
-                <i class="bi bi-lightning-charge-fill text-accent"></i> Bootstrap Playground
+            <a class="navbar-brand fw-bold" href="#">
+                <i class="bi bi-lightning-charge-fill text-info"></i> Bootstrap Playground
             </a>
             <div class="d-flex align-items-center gap-3">
-                <div class="progress-pill d-none d-md-flex">
-                    <span class="progress-label">Progress</span>
-                    <div class="progress mini-progress">
-                        <div class="progress-bar bg-accent" id="globalProgress" role="progressbar" style="width: 0%"></div>
-                    </div>
-                    <span class="progress-pct" id="globalPct">0%</span>
+                <!-- XP & Level -->
+                <div class="d-none d-md-flex align-items-center gap-3">
+                    <span class="badge bg-success bg-opacity-25 text-success border border-success px-2 py-1"
+                        id="xpDisplay" style="font-size:0.8rem;">0 XP</span>
+                    <span class="badge bg-warning bg-opacity-25 text-warning border border-warning px-2 py-1"
+                        id="levelDisplay" style="font-size:0.8rem;">🌱 Beginner</span>
+                    <span class="badge bg-danger bg-opacity-25 text-danger border border-danger px-2 py-1"
+                        id="streakDisplay" style="font-size:0.8rem;">🔥 0</span>
                 </div>
-                <button class="btn btn-sm btn-outline-light d-lg-none" data-bs-toggle="offcanvas" data-bs-target="#sidebarOffcanvas">
+                <!-- Progress Bar -->
+                <div class="d-none d-md-flex align-items-center gap-2">
+                    <small class="text-secondary">Progress</small>
+                    <div class="mini-progress bg-secondary">
+                        <div id="globalProgress" class="h-100 bg-info rounded"
+                            style="width:0%; transition: width 0.5s;"></div>
+                    </div>
+                    <small class="text-info fw-bold" id="globalPct">0%</small>
+                </div>
+                <!-- Theme Toggle -->
+                <span class="theme-toggle" id="themeToggle" title="Toggle Light/Dark" data-bs-toggle="tooltip">☀️</span>
+                <button class="btn btn-sm btn-outline-light d-lg-none" data-bs-toggle="offcanvas"
+                    data-bs-target="#sidebarOffcanvas">
                     <i class="bi bi-list"></i>
                 </button>
             </div>
         </div>
     </nav>
 
-    <!-- Sidebar (offcanvas on mobile, fixed on desktop) -->
-    <div class="offcanvas-lg offcanvas-start sidebar-wrap" id="sidebarOffcanvas">
+    <!-- Sidebar -->
+    <div class="offcanvas-lg offcanvas-start bg-dark border-end border-secondary" id="sidebarOffcanvas"
+        style="width:260px; top:64px;">
         <div class="offcanvas-header d-lg-none">
             <h5 class="offcanvas-title">Modules</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#sidebarOffcanvas"></button>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
         </div>
-        <div class="offcanvas-body sidebar" id="sidebar">
+        <div class="offcanvas-body sidebar" style="overflow-y:auto;">
             <nav class="sidebar-nav">
                 <a href="#hero" class="sidebar-link active"><i class="bi bi-house"></i> Home</a>
-                <span class="sidebar-heading">Fundamentals</span>
-                <a href="#mod-typography" class="sidebar-link" data-module="typography"><i class="bi bi-fonts"></i> Typography</a>
-                <a href="#mod-colors" class="sidebar-link" data-module="colors"><i class="bi bi-palette"></i> Colors</a>
-                <a href="#mod-grid" class="sidebar-link" data-module="grid"><i class="bi bi-grid-3x3"></i> Grid System</a>
-                <span class="sidebar-heading">Components</span>
-                <a href="#mod-buttons" class="sidebar-link" data-module="buttons"><i class="bi bi-hand-index"></i> Buttons</a>
-                <a href="#mod-cards" class="sidebar-link" data-module="cards"><i class="bi bi-card-heading"></i> Cards</a>
-                <a href="#mod-forms" class="sidebar-link" data-module="forms"><i class="bi bi-input-cursor-text"></i> Forms</a>
-                <a href="#mod-components" class="sidebar-link" data-module="components"><i class="bi bi-puzzle"></i> Components</a>
-                <span class="sidebar-heading">Advanced</span>
-                <a href="#mod-flex" class="sidebar-link" data-module="flex"><i class="bi bi-distribute-horizontal"></i> Flexbox</a>
-                <a href="#playground" class="sidebar-link"><i class="bi bi-code-square"></i> Free Playground</a>
-                <a href="#challenges" class="sidebar-link"><i class="bi bi-trophy"></i> Challenges</a>
+
+                <span class="sidebar-heading">Unit I — Scaffolding</span>
+                <a href="#mod-intro" class="sidebar-link"><i class="bi bi-info-circle"></i> Introduction</a>
+                <a href="#mod-filestructure" class="sidebar-link"><i class="bi bi-folder2-open"></i> File Structure</a>
+                <a href="#mod-containers" class="sidebar-link"><i class="bi bi-box"></i> Containers</a>
+
+                <span class="sidebar-heading">Unit II — Grid System</span>
+                <a href="#mod-grid" class="sidebar-link"><i class="bi bi-grid-3x3"></i> Grid System</a>
+
+                <span class="sidebar-heading">Unit III — Layout Components</span>
+                <a href="#mod-navbar" class="sidebar-link"><i class="bi bi-layout-text-sidebar-reverse"></i> Navbar</a>
+                <a href="#mod-dropdowns" class="sidebar-link"><i class="bi bi-caret-down-square"></i> Dropdowns</a>
+                <a href="#mod-btngroups" class="sidebar-link"><i class="bi bi-segmented-nav"></i> Button Groups</a>
+                <a href="#mod-navcomponents" class="sidebar-link"><i class="bi bi-signpost-2"></i> Breadcrumbs &amp;
+                    Pagination</a>
+                <a href="#mod-cards" class="sidebar-link"><i class="bi bi-card-heading"></i> Cards</a>
+                <a href="#mod-badges" class="sidebar-link"><i class="bi bi-bookmark-star"></i> Badges &amp; Spinners</a>
+
+                <span class="sidebar-heading">Unit IV — Bootstrap CSS</span>
+                <a href="#mod-typography" class="sidebar-link"><i class="bi bi-fonts"></i> Typography</a>
+                <a href="#mod-tables" class="sidebar-link"><i class="bi bi-table"></i> Tables &amp; Code</a>
+                <a href="#mod-forms" class="sidebar-link"><i class="bi bi-input-cursor-text"></i> Forms</a>
+                <a href="#mod-buttons" class="sidebar-link"><i class="bi bi-hand-index"></i> Buttons</a>
+                <a href="#mod-images" class="sidebar-link"><i class="bi bi-image"></i> Images &amp; Icons</a>
+
+                <span class="sidebar-heading">Unit V — JS Plugins</span>
+                <a href="#mod-modals" class="sidebar-link"><i class="bi bi-window-stack"></i> Modals</a>
+                <a href="#mod-carousel" class="sidebar-link"><i class="bi bi-film"></i> Carousel</a>
+                <a href="#mod-collapse" class="sidebar-link"><i class="bi bi-arrows-collapse"></i> Collapse &amp;
+                    Tabs</a>
+                <a href="#mod-tooltips" class="sidebar-link"><i class="bi bi-chat-square-dots"></i> Tooltips &amp;
+                    Popovers</a>
+                <a href="#mod-scrollspy" class="sidebar-link"><i class="bi bi-binoculars"></i> Scrollspy &amp;
+                    Alerts</a>
+
+                <span class="sidebar-heading">Unit VI — Utilities</span>
+                <a href="#mod-flex" class="sidebar-link"><i class="bi bi-distribute-horizontal"></i> Flexbox</a>
+                <a href="#mod-display" class="sidebar-link"><i class="bi bi-display"></i> Display &amp; Float</a>
+                <a href="#mod-api" class="sidebar-link"><i class="bi bi-gear"></i> Utilities API</a>
             </nav>
         </div>
     </div>
 
     <!-- Main Content -->
-    <main class="main-content" id="mainContent">
+    <main class="main-content" style="padding-top:64px;">
 
-        <!-- Hero -->
-        <section id="hero" class="hero-section">
-            <div class="hero-bg-shapes">
-                <div class="shape shape-1"></div>
-                <div class="shape shape-2"></div>
-                <div class="shape shape-3"></div>
-            </div>
-            <div class="container text-center position-relative">
-                <span class="badge badge-glow mb-3">✨ 100% Free & Interactive</span>
-                <h1 class="hero-title">Learn Bootstrap<br><span class="gradient-text">By Playing</span></h1>
-                <p class="hero-sub mx-auto">No boring tutorials. Edit real code, see instant results, and master web development one fun challenge at a time.</p>
+        <!-- ==================== HERO ==================== -->
+        <section id="hero" class="hero-section text-center">
+            <div class="container">
+                <span class="badge bg-info bg-opacity-25 text-info border border-info mb-3 px-3 py-2">✨ CAP916:
+                    Front-End Web UI Frameworks</span>
+                <h1 class="display-3 fw-bold mb-3">Learn Bootstrap<br><span class="text-info" id="heroTyping">By
+                        Playing</span></h1>
+                <p class="lead text-secondary mx-auto" style="max-width:540px;">No boring tutorials. Read clear
+                    explanations, see real examples, and master every Bootstrap concept from your syllabus — one fun
+                    module at a time.</p>
                 <div class="d-flex gap-3 justify-content-center flex-wrap mt-4">
-                    <a href="#mod-typography" class="btn btn-accent btn-lg px-4">Start Learning <i class="bi bi-arrow-right"></i></a>
-                    <a href="#playground" class="btn btn-outline-light btn-lg px-4">Open Playground</a>
+                    <a href="#mod-intro" class="btn btn-info btn-lg px-4">Start Learning <i
+                            class="bi bi-arrow-right"></i></a>
+                    <a href="#mod-grid" class="btn btn-outline-light btn-lg px-4">Explore Grid</a>
                 </div>
-                <div class="hero-stats mt-5">
-                    <div class="stat"><span class="stat-num">8</span><span class="stat-label">Modules</span></div>
-                    <div class="stat"><span class="stat-num">24+</span><span class="stat-label">Examples</span></div>
-                    <div class="stat"><span class="stat-num">∞</span><span class="stat-label">Experiments</span></div>
+                <div class="d-inline-flex gap-4 mt-5 p-4 bg-dark bg-opacity-50 border border-secondary rounded-3">
+                    <div class="text-center"><span class="d-block fs-3 fw-bold text-info">6</span><small
+                            class="text-secondary text-uppercase">Units</small></div>
+                    <div class="text-center"><span class="d-block fs-3 fw-bold text-info">20+</span><small
+                            class="text-secondary text-uppercase">Modules</small></div>
+                    <div class="text-center"><span class="d-block fs-3 fw-bold text-info">∞</span><small
+                            class="text-secondary text-uppercase">Experiments</small></div>
                 </div>
             </div>
         </section>
 
-        <!-- How it works -->
+        <!-- Gamification Stats Bar -->
+        <section class="py-3 px-3 border-bottom border-secondary" style="background:rgba(0,200,255,0.03);">
+            <div class="container">
+                <div class="d-flex justify-content-center align-items-center gap-4 flex-wrap">
+                    <div class="d-flex align-items-center gap-2">
+                        <i class="bi bi-star-fill text-warning"></i>
+                        <span class="text-secondary small">XP:</span>
+                        <strong class="text-success" id="xpDisplayHero">0</strong>
+                    </div>
+                    <div class="d-flex align-items-center gap-2">
+                        <i class="bi bi-trophy-fill text-info"></i>
+                        <span class="text-secondary small">Level:</span>
+                        <strong class="text-warning" id="levelDisplayHero">🌱 Beginner</strong>
+                    </div>
+                    <div class="d-flex align-items-center gap-2">
+                        <i class="bi bi-fire text-danger"></i>
+                        <span class="text-secondary small">Streak:</span>
+                        <strong class="text-danger" id="streakDisplayHero">0</strong>
+                    </div>
+                    <div class="d-flex align-items-center gap-2">
+                        <i class="bi bi-check-circle-fill text-info"></i>
+                        <span class="text-secondary small">Done:</span>
+                        <strong class="text-info" id="globalPctHero">0%</strong>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- How It Works -->
         <section class="py-5 px-3">
             <div class="container">
                 <div class="row g-4 justify-content-center">
                     <div class="col-md-4">
-                        <div class="glass-card how-card text-center p-4">
-                            <div class="how-icon">📖</div>
+                        <div class="card bg-dark border-secondary text-center p-4 h-100">
+                            <div class="fs-1">📖</div>
                             <h5>1. Read</h5>
-                            <p class="text-muted small mb-0">Short, clear explanations of each concept — no jargon overload.</p>
+                            <p class="text-secondary small mb-0">Short, clear explanations of each concept — no jargon
+                                overload.</p>
                         </div>
                     </div>
                     <div class="col-md-4">
-                        <div class="glass-card how-card text-center p-4">
-                            <div class="how-icon">🛠️</div>
+                        <div class="card bg-dark border-secondary text-center p-4 h-100">
+                            <div class="fs-1">🛠️</div>
                             <h5>2. Try</h5>
-                            <p class="text-muted small mb-0">Edit live code and watch your changes appear instantly.</p>
+                            <p class="text-secondary small mb-0">See live examples and understand how Bootstrap classes
+                                work.</p>
                         </div>
                     </div>
                     <div class="col-md-4">
-                        <div class="glass-card how-card text-center p-4">
-                            <div class="how-icon">🏆</div>
+                        <div class="card bg-dark border-secondary text-center p-4 h-100">
+                            <div class="fs-1">🏆</div>
                             <h5>3. Master</h5>
-                            <p class="text-muted small mb-0">Complete challenges, track progress, and build real skills.</p>
+                            <p class="text-secondary small mb-0">Practice with challenges and build real skills.</p>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- ========== MODULES ========== -->
 
-        <!-- Typography Module -->
-        <section class="module-section" id="mod-typography" data-module="typography">
+        <!-- ==================== UNIT I: SCAFFOLDING ==================== -->
+
+        <!-- Introduction to Bootstrap -->
+        <section class="module-section" id="mod-intro">
             <div class="container">
-                <div class="module-header">
-                    <span class="module-badge">Fundamentals</span>
-                    <h2><i class="bi bi-fonts text-accent"></i> Typography</h2>
-                    <p class="text-muted">Bootstrap gives you powerful utility classes to style text without writing custom CSS.</p>
+                <div class="mb-4">
+                    <small class="text-info text-uppercase fw-bold" style="letter-spacing:1px;">Unit I —
+                        Scaffolding</small>
+                    <h2 class="fw-bold mt-1"><i class="bi bi-info-circle text-accent"></i> Introduction to Bootstrap
+                    </h2>
+                    <p class="text-secondary">What is Bootstrap, why use it, and how does it fit into modern web
+                        development?</p>
                 </div>
+
+                <!-- Theory -->
+                <div class="card bg-dark border-info border-start border-3 p-4 mb-4">
+                    <h5>📚 Understanding Bootstrap</h5>
+                    <p class="text-secondary"><strong class="text-light">Bootstrap</strong> is the world's most popular
+                        open-source <strong class="text-light">CSS framework</strong>, originally created by Mark Otto
+                        and Jacob Thornton at Twitter in 2011. It provides pre-written CSS and JavaScript to quickly
+                        build responsive, mobile-first websites.</p>
+                    <p class="text-secondary"><strong class="text-light">Why use Bootstrap?</strong> It gives you
+                        ready-to-use components (buttons, navbars, cards, forms) so you can focus on <em>what</em> your
+                        site looks like rather than coding basic styling from zero.</p>
+                    <p class="text-secondary mb-1"><strong class="text-light">Key advantages:</strong></p>
+                    <ul class="text-secondary">
+                        <li><strong class="text-light">Responsive Design Built-In:</strong> Components automatically
+                            adapt to different screen sizes using a mobile-first approach.</li>
+                        <li><strong class="text-light">Consistent Cross-Browser Support:</strong> Your site looks the
+                            same everywhere.</li>
+                        <li><strong class="text-light">Rapid Prototyping:</strong> Build professional interfaces in
+                            minutes.</li>
+                        <li><strong class="text-light">Huge Community:</strong> Extensive documentation and thousands of
+                            themes.</li>
+                        <li><strong class="text-light">Customizable:</strong> Override defaults with your own CSS or
+                            Sass variables.</li>
+                    </ul>
+                    <div class="alert alert-info py-2 mt-3 small">💡 <strong>Good to know:</strong> Bootstrap follows a
+                        <strong>mobile-first</strong> philosophy — styles are designed for small screens first, then
+                        enhanced for larger screens using media queries.</div>
+                </div>
+
                 <div class="row g-4">
                     <div class="col-lg-6">
-                        <div class="glass-card p-4">
-                            <h5 class="mb-3">📖 Key Concepts</h5>
-                            <ul class="concept-list">
-                                <li><code>.display-1</code> to <code>.display-6</code> — Large, eye-catching headings</li>
-                                <li><code>.lead</code> — Makes a paragraph stand out</li>
-                                <li><code>.fw-bold</code>, <code>.fst-italic</code> — Font weight & style</li>
-                                <li><code>.text-center</code>, <code>.text-end</code> — Text alignment</li>
-                                <li><code>.text-uppercase</code>, <code>.text-lowercase</code> — Transform text</li>
-                                <li><code>.fs-1</code> to <code>.fs-6</code> — Font size utilities</li>
+                        <div class="card bg-dark border-secondary p-4 h-100">
+                            <h5>📖 Key Concepts</h5>
+                            <ul class="list-unstyled mb-0">
+                                <li class="py-2 border-bottom border-secondary"><strong>CSS Framework</strong> —
+                                    Pre-written CSS + JS for rapid development</li>
+                                <li class="py-2 border-bottom border-secondary"><strong>Mobile-First</strong> — Design
+                                    for small screens first, scale up</li>
+                                <li class="py-2 border-bottom border-secondary"><strong>Responsive Design</strong> —
+                                    Layouts that adapt to any screen</li>
+                                <li class="py-2 border-bottom border-secondary"><strong>Utility Classes</strong> —
+                                    Single-purpose classes like <code>.text-center</code>, <code>.mt-3</code></li>
+                                <li class="py-2 border-bottom border-secondary"><strong>Components</strong> — Pre-built
+                                    UI elements (navbar, cards, modals)</li>
+                                <li class="py-2"><strong>Grid System</strong> — 12-column layout system</li>
                             </ul>
                         </div>
                     </div>
                     <div class="col-lg-6">
-                        <div class="glass-card p-4">
-                            <h5 class="mb-3">👀 Live Example</h5>
-                            <div class="example-preview p-3 rounded">
-                                <h1 class="display-4">Display Heading</h1>
-                                <p class="lead">This is a lead paragraph. It stands out from regular text.</p>
-                                <p class="fw-bold">Bold text using <code>.fw-bold</code></p>
-                                <p class="fst-italic text-muted">Italic & muted text combined</p>
-                                <p class="text-uppercase fs-6">uppercased small text</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="mt-4">
-                    <div class="glass-card p-4">
-                        <div class="d-flex justify-content-between align-items-center mb-3">
-                            <h5 class="mb-0">🛠️ Try It Yourself</h5>
-                            <div class="d-flex gap-2">
-                                <button class="btn btn-sm btn-outline-secondary reset-btn" data-module="typography">
-                                    <i class="bi bi-arrow-counterclockwise"></i> Reset
-                                </button>
-                                <button class="btn btn-sm btn-accent complete-btn" data-module="typography">
-                                    <i class="bi bi-check-lg"></i> Mark Complete
-                                </button>
-                            </div>
-                        </div>
-                        <div class="editor-wrapper">
-                            <div class="row g-3">
-                                <div class="col-md-6">
-                                    <div class="code-editor-box">
-                                        <div class="editor-tab"><i class="bi bi-code-slash"></i> HTML</div>
-                                        <textarea class="code-editor" id="editor-typography" spellcheck="false"><h1 class="display-3 text-center">Hello World!</h1>
-<p class="lead text-center text-muted">I'm learning Bootstrap Typography</p>
-<p class="fw-bold fs-4">Try changing my classes!</p>
-<p class="fst-italic text-uppercase">experiment freely</p>
-<hr>
-<p class="fs-1">fs-1: Largest</p>
-<p class="fs-3">fs-3: Medium</p>
-<p class="fs-6">fs-6: Smallest</p></textarea>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="preview-box">
-                                        <div class="editor-tab"><i class="bi bi-eye"></i> Preview</div>
-                                        <iframe class="live-preview" id="preview-typography"></iframe>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Colors Module -->
-        <section class="module-section" id="mod-colors" data-module="colors">
-            <div class="container">
-                <div class="module-header">
-                    <span class="module-badge">Fundamentals</span>
-                    <h2><i class="bi bi-palette text-accent"></i> Colors & Backgrounds</h2>
-                    <p class="text-muted">Bootstrap's color utilities let you style text and backgrounds with semantic color classes.</p>
-                </div>
-                <div class="row g-4">
-                    <div class="col-lg-6">
-                        <div class="glass-card p-4">
-                            <h5 class="mb-3">📖 Key Concepts</h5>
-                            <ul class="concept-list">
-                                <li><code>.text-primary</code>, <code>.text-success</code>, <code>.text-danger</code> — Text colors</li>
-                                <li><code>.bg-primary</code>, <code>.bg-dark</code>, <code>.bg-warning</code> — Background colors</li>
-                                <li><code>.text-bg-primary</code> — Combined text + background helper</li>
-                                <li><code>.bg-opacity-25</code>, <code>.bg-opacity-50</code> — Background transparency</li>
-                                <li><code>.text-body-secondary</code> — Subtle/muted text</li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="col-lg-6">
-                        <div class="glass-card p-4">
-                            <h5 class="mb-3">👀 Live Example</h5>
-                            <div class="example-preview p-3 rounded">
-                                <p class="text-primary fs-5">Primary colored text</p>
-                                <p class="text-success fs-5">Success colored text</p>
-                                <p class="text-danger fs-5">Danger colored text</p>
-                                <span class="badge text-bg-primary me-1">Primary</span>
-                                <span class="badge text-bg-success me-1">Success</span>
-                                <span class="badge text-bg-warning me-1">Warning</span>
-                                <span class="badge text-bg-danger">Danger</span>
-                                <div class="mt-3 p-2 bg-info bg-opacity-25 rounded">bg-info at 25% opacity</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="mt-4">
-                    <div class="glass-card p-4">
-                        <div class="d-flex justify-content-between align-items-center mb-3">
-                            <h5 class="mb-0">🛠️ Try It Yourself</h5>
-                            <div class="d-flex gap-2">
-                                <button class="btn btn-sm btn-outline-secondary reset-btn" data-module="colors"><i class="bi bi-arrow-counterclockwise"></i> Reset</button>
-                                <button class="btn btn-sm btn-accent complete-btn" data-module="colors"><i class="bi bi-check-lg"></i> Mark Complete</button>
-                            </div>
-                        </div>
-                        <div class="editor-wrapper">
-                            <div class="row g-3">
-                                <div class="col-md-6">
-                                    <div class="code-editor-box">
-                                        <div class="editor-tab"><i class="bi bi-code-slash"></i> HTML</div>
-                                        <textarea class="code-editor" id="editor-colors" spellcheck="false"><div class="p-3 mb-2 bg-primary text-white rounded">Primary Background</div>
-<div class="p-3 mb-2 bg-success text-white rounded">Success Background</div>
-<div class="p-3 mb-2 bg-warning text-dark rounded">Warning Background</div>
-<div class="p-3 mb-2 bg-danger bg-opacity-50 text-white rounded">
-  Danger at 50% opacity
-</div>
-
-<p class="text-info mt-3">Try changing colors!</p>
-<p class="text-body-secondary">Secondary body text</p></textarea>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="preview-box">
-                                        <div class="editor-tab"><i class="bi bi-eye"></i> Preview</div>
-                                        <iframe class="live-preview" id="preview-colors"></iframe>
-                                    </div>
+                        <div class="card bg-dark border-secondary p-4 h-100">
+                            <h5>👀 Live Example — Your First Bootstrap Page</h5>
+                            <div class="example-preview p-3">
+                                <div class="alert alert-primary py-2 small"><i class="bi bi-info-circle"></i> This
+                                    content uses Bootstrap classes!</div>
+                                <h4 class="text-center">Hello, Bootstrap!</h4>
+                                <p class="lead text-center text-secondary">This text uses the <code>.lead</code> class
+                                </p>
+                                <div class="d-flex gap-2 justify-content-center">
+                                    <button class="btn btn-primary btn-sm">Primary</button>
+                                    <button class="btn btn-success btn-sm">Success</button>
+                                    <button class="btn btn-outline-danger btn-sm">Danger</button>
                                 </div>
                             </div>
                         </div>
@@ -266,95 +274,372 @@
             </div>
         </section>
 
-        <!-- Grid Module -->
-        <section class="module-section" id="mod-grid" data-module="grid">
+        <!-- File Structure -->
+        <section class="module-section fade-in" id="mod-filestructure">
             <div class="container">
-                <div class="module-header">
-                    <span class="module-badge">Fundamentals</span>
-                    <h2><i class="bi bi-grid-3x3 text-accent"></i> Grid System</h2>
-                    <p class="text-muted">Bootstrap's 12-column grid is the foundation of responsive layouts. Master it and you can build anything.</p>
+                <div class="mb-4">
+                    <small class="text-info text-uppercase fw-bold" style="letter-spacing:1px;">Unit I —
+                        Scaffolding</small>
+                    <h2 class="fw-bold mt-1"><i class="bi bi-folder2-open text-accent"></i> File Structure &amp; HTML
+                        Template</h2>
+                    <p class="text-secondary">How Bootstrap is organized and how to set up a basic Bootstrap project.
+                    </p>
                 </div>
+
+                <div class="card bg-dark border-info border-start border-3 p-4 mb-4">
+                    <h5>📚 Understanding Bootstrap's Structure</h5>
+                    <p class="text-secondary"><strong class="text-light">Key files:</strong>
+                        <code>bootstrap.min.css</code> (all styles), <code>bootstrap.bundle.min.js</code> (JS +
+                        Popper.js for tooltips/dropdowns).</p>
+                    <p class="text-secondary"><strong class="text-light">Using a CDN</strong> is the easiest way — just
+                        add <code>&lt;link&gt;</code> and <code>&lt;script&gt;</code> tags.</p>
+                    <p class="text-secondary mb-1"><strong class="text-light">Every Bootstrap page needs:</strong></p>
+                    <ol class="text-secondary">
+                        <li>HTML5 doctype: <code>&lt;!DOCTYPE html&gt;</code></li>
+                        <li>Responsive viewport meta tag</li>
+                        <li>Bootstrap CSS link in <code>&lt;head&gt;</code></li>
+                        <li>Bootstrap JS bundle before <code>&lt;/body&gt;</code></li>
+                    </ol>
+                    <div class="alert alert-info py-2 mt-3 small">💡 Always include the <strong>viewport meta
+                            tag</strong> — without it, responsive design fails on mobile.</div>
+                </div>
+
                 <div class="row g-4">
                     <div class="col-lg-6">
-                        <div class="glass-card p-4">
-                            <h5 class="mb-3">📖 Key Concepts</h5>
-                            <ul class="concept-list">
-                                <li><code>.container</code> — Wraps content with responsive padding</li>
-                                <li><code>.row</code> — Creates a horizontal group of columns</li>
-                                <li><code>.col-6</code> — Takes 6 out of 12 columns (50% width)</li>
-                                <li><code>.col-md-4</code> — 4 columns on medium screens and up</li>
-                                <li><code>.g-3</code> — Adds gap/gutter between columns</li>
-                                <li>Breakpoints: <code>sm</code>, <code>md</code>, <code>lg</code>, <code>xl</code>, <code>xxl</code></li>
+                        <div class="card bg-dark border-secondary p-4">
+                            <h5>📖 Bootstrap File Organization</h5>
+                            <ul class="list-unstyled mb-0">
+                                <li class="py-2 border-bottom border-secondary"><code>bootstrap/css/</code> — Compiled
+                                    CSS files</li>
+                                <li class="py-2 border-bottom border-secondary"><code>bootstrap/js/</code> — Compiled JS
+                                    files</li>
+                                <li class="py-2 border-bottom border-secondary"><code>bootstrap.min.css</code> — Use in
+                                    production</li>
+                                <li class="py-2 border-bottom border-secondary"><code>bootstrap.bundle.min.js</code> —
+                                    JS + Popper combined</li>
+                                <li class="py-2 border-bottom border-secondary"><code>&lt;!DOCTYPE html&gt;</code> —
+                                    Required doctype</li>
+                                <li class="py-2"><code>viewport meta tag</code> — Required for responsive</li>
                             </ul>
                         </div>
                     </div>
                     <div class="col-lg-6">
-                        <div class="glass-card p-4">
-                            <h5 class="mb-3">👀 Live Example</h5>
-                            <div class="example-preview p-3 rounded">
+                        <div class="card bg-dark border-secondary p-4">
+                            <h5>👀 Starter Template</h5>
+                            <div class="example-preview p-3">
+                                <pre class="mb-0 small text-light"><code>&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+  &lt;meta charset="UTF-8"&gt;
+  &lt;meta name="viewport"
+    content="width=device-width,
+    initial-scale=1.0"&gt;
+  &lt;link href="bootstrap.min.css"
+    rel="stylesheet"&gt;
+  &lt;title&gt;My Page&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;h1&gt;Hello World!&lt;/h1&gt;
+  &lt;script src="bootstrap.bundle.min.js"&gt;
+  &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Containers -->
+        <section class="module-section fade-in" id="mod-containers">
+            <div class="container">
+                <div class="mb-4">
+                    <small class="text-info text-uppercase fw-bold" style="letter-spacing:1px;">Unit I —
+                        Scaffolding</small>
+                    <h2 class="fw-bold mt-1"><i class="bi bi-box text-accent"></i> Containers &amp; Responsive Design
+                    </h2>
+                    <p class="text-secondary">The building blocks of Bootstrap layouts.</p>
+                </div>
+
+                <div class="card bg-dark border-info border-start border-3 p-4 mb-4">
+                    <h5>📚 Understanding Containers</h5>
+                    <p class="text-secondary"><strong class="text-light">Containers</strong> are the most fundamental
+                        layout element. Three types:</p>
+                    <ul class="text-secondary">
+                        <li><strong class="text-light"><code>.container</code> (Fixed):</strong> Has a fixed max-width
+                            at each breakpoint. Content is centered.</li>
+                        <li><strong class="text-light"><code>.container-fluid</code> (Fluid):</strong> Always 100%
+                            width, edge to edge.</li>
+                        <li><strong class="text-light"><code>.container-{breakpoint}</code> (Responsive):</strong> Fluid
+                            below breakpoint, fixed above.</li>
+                    </ul>
+                    <p class="text-secondary mb-1"><strong class="text-light">Breakpoints:</strong> xs(&lt;576px),
+                        sm(≥576px), md(≥768px), lg(≥992px), xl(≥1200px), xxl(≥1400px)</p>
+                    <div class="alert alert-info py-2 mt-3 small">💡 The <code>.container</code> class is almost always
+                        your first wrapper. Put rows and columns inside it.</div>
+                </div>
+
+                <div class="row g-4">
+                    <div class="col-lg-6">
+                        <div class="card bg-dark border-secondary p-4">
+                            <h5>📖 Key Classes</h5>
+                            <ul class="list-unstyled mb-0">
+                                <li class="py-2 border-bottom border-secondary"><code>.container</code> — Fixed-width,
+                                    centered</li>
+                                <li class="py-2 border-bottom border-secondary"><code>.container-fluid</code> — 100%
+                                    width always</li>
+                                <li class="py-2 border-bottom border-secondary"><code>.container-sm</code> — Fluid until
+                                    ≥576px</li>
+                                <li class="py-2 border-bottom border-secondary"><code>.container-md</code> — Fluid until
+                                    ≥768px</li>
+                                <li class="py-2 border-bottom border-secondary"><code>.container-lg</code> — Fluid until
+                                    ≥992px</li>
+                                <li class="py-2"><code>.container-xl</code> — Fluid until ≥1200px</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="card bg-dark border-secondary p-4">
+                            <h5>👀 Live Example</h5>
+                            <div class="example-preview p-3">
+                                <div
+                                    class="p-2 mb-2 bg-primary bg-opacity-25 border border-primary rounded text-center small">
+                                    .container (fixed-width, centered)</div>
+                                <div
+                                    class="p-2 mb-2 bg-success bg-opacity-25 border border-success rounded text-center small">
+                                    .container-fluid (100% width always)</div>
+                                <div
+                                    class="p-2 bg-warning bg-opacity-25 border border-warning rounded text-center small">
+                                    .container-md (fluid below 768px)</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- PLAYGROUND: Containers -->
+                <div class="playground-card">
+                    <h5 class="text-info mb-3">Play with Container Widths</h5>
+                    <p class="text-secondary small mb-3">Click each button and watch the box below change width — this
+                        is exactly how Bootstrap containers work!</p>
+                    <div class="d-flex gap-2 mb-3 flex-wrap">
+                        <button class="btn btn-outline-info"
+                            onclick="var d=document.getElementById('containerDemo');d.style.maxWidth='100%';d.textContent='.container-fluid → always 100% width'">Fluid
+                            (100%)</button>
+                        <button class="btn btn-outline-info"
+                            onclick="var d=document.getElementById('containerDemo');d.style.maxWidth='720px';d.textContent='.container → fixed max-width (720px)'">Fixed
+                            (720px)</button>
+                        <button class="btn btn-outline-info"
+                            onclick="var d=document.getElementById('containerDemo');d.style.maxWidth='540px';d.textContent='.container-sm → max-width 540px'">Small
+                            (540px)</button>
+                        <button class="btn btn-outline-info"
+                            onclick="var d=document.getElementById('containerDemo');d.style.maxWidth='960px';d.textContent='.container-lg → max-width 960px'">Large
+                            (960px)</button>
+                    </div>
+                    <div id="containerDemo"
+                        class="p-4 bg-info bg-opacity-10 border border-info rounded text-center mx-auto fs-5"
+                        style="transition:max-width 0.4s;max-width:100%">👆 Click a button to see width change!</div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ==================== UNIT II: GRID SYSTEM ==================== -->
+
+        <section class="module-section fade-in" id="mod-grid">
+            <div class="container">
+                <div class="mb-4">
+                    <small class="text-info text-uppercase fw-bold" style="letter-spacing:1px;">Unit II — Grid
+                        System</small>
+                    <h2 class="fw-bold mt-1"><i class="bi bi-grid-3x3 text-accent"></i> Bootstrap Grid System</h2>
+                    <p class="text-secondary">The 12-column grid is Bootstrap's most powerful feature.</p>
+                </div>
+
+                <div class="card bg-dark border-info border-start border-3 p-4 mb-4">
+                    <h5>📚 Understanding the Grid</h5>
+                    <p class="text-secondary">The grid uses <strong class="text-light">containers, rows, and
+                            columns</strong>. It divides any row into <strong class="text-light">12 equal
+                            columns</strong>. Two equal columns? <code>.col-6</code> + <code>.col-6</code> (6+6=12).
+                        Sidebar layout? <code>.col-8</code> + <code>.col-4</code> (8+4=12).</p>
+                    <p class="text-secondary"><strong class="text-light">Responsive columns:</strong>
+                        <code>.col-12 .col-md-6 .col-lg-4</code> = full width on phones, half width on tablets,
+                        one-third on desktops.</p>
+                    <p class="text-secondary"><strong class="text-light">Gutters:</strong> Use <code>.g-0</code> to
+                        <code>.g-5</code> on the <code>.row</code> to control spacing between columns.</p>
+                    <div class="alert alert-info py-2 mt-3 small">💡 Always follow: <code>.container</code> →
+                        <code>.row</code> → <code>.col-*</code>. Columns must be direct children of rows.</div>
+                </div>
+
+                <div class="row g-4">
+                    <div class="col-lg-6">
+                        <div class="card bg-dark border-secondary p-4">
+                            <h5>📖 Key Classes</h5>
+                            <ul class="list-unstyled mb-0">
+                                <li class="py-2 border-bottom border-secondary"><code>.row</code> — Creates a horizontal
+                                    group of columns</li>
+                                <li class="py-2 border-bottom border-secondary"><code>.col-6</code> — Takes 6 of 12
+                                    columns (50%)</li>
+                                <li class="py-2 border-bottom border-secondary"><code>.col-md-4</code> — 4 columns on md
+                                    screens and up</li>
+                                <li class="py-2 border-bottom border-secondary"><code>.col-auto</code> — Sizes to its
+                                    content</li>
+                                <li class="py-2 border-bottom border-secondary"><code>.g-3</code> — Gutter spacing on
+                                    rows</li>
+                                <li class="py-2">Breakpoints: <code>sm</code>, <code>md</code>, <code>lg</code>,
+                                    <code>xl</code>, <code>xxl</code></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="card bg-dark border-secondary p-4">
+                            <h5>👀 Live Example</h5>
+                            <div class="example-preview p-3">
+                                <p class="small text-secondary mb-2">Two equal columns (6+6=12):</p>
                                 <div class="row g-2 mb-2">
-                                    <div class="col-6"><div class="grid-demo">col-6</div></div>
-                                    <div class="col-6"><div class="grid-demo">col-6</div></div>
+                                    <div class="col-6">
+                                        <div class="grid-demo">col-6</div>
+                                    </div>
+                                    <div class="col-6">
+                                        <div class="grid-demo">col-6</div>
+                                    </div>
                                 </div>
+                                <p class="small text-secondary mb-2">Three equal columns (4+4+4=12):</p>
                                 <div class="row g-2 mb-2">
-                                    <div class="col-4"><div class="grid-demo">col-4</div></div>
-                                    <div class="col-4"><div class="grid-demo">col-4</div></div>
-                                    <div class="col-4"><div class="grid-demo">col-4</div></div>
+                                    <div class="col-4">
+                                        <div class="grid-demo">col-4</div>
+                                    </div>
+                                    <div class="col-4">
+                                        <div class="grid-demo">col-4</div>
+                                    </div>
+                                    <div class="col-4">
+                                        <div class="grid-demo">col-4</div>
+                                    </div>
                                 </div>
+                                <p class="small text-secondary mb-2">Unequal (3+9=12):</p>
                                 <div class="row g-2">
-                                    <div class="col-3"><div class="grid-demo">col-3</div></div>
-                                    <div class="col-9"><div class="grid-demo">col-9</div></div>
+                                    <div class="col-3">
+                                        <div class="grid-demo">col-3</div>
+                                    </div>
+                                    <div class="col-9">
+                                        <div class="grid-demo">col-9</div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="mt-4">
-                    <div class="glass-card p-4">
-                        <div class="d-flex justify-content-between align-items-center mb-3">
-                            <h5 class="mb-0">🛠️ Try It Yourself</h5>
-                            <div class="d-flex gap-2">
-                                <button class="btn btn-sm btn-outline-secondary reset-btn" data-module="grid"><i class="bi bi-arrow-counterclockwise"></i> Reset</button>
-                                <button class="btn btn-sm btn-accent complete-btn" data-module="grid"><i class="bi bi-check-lg"></i> Mark Complete</button>
-                            </div>
+
+                <!-- PLAYGROUND: Grid System -->
+                <div class="playground-card">
+                    <h5 class="text-info mb-3">Play with the 12-Column Grid</h5>
+                    <p class="text-secondary small mb-3">Click buttons to resize the left column. Watch how the right
+                        column automatically fills the remaining space!</p>
+                    <div class="d-flex gap-2 mb-3 flex-wrap">
+                        <button class="btn btn-outline-info"
+                            onclick="document.getElementById('gridDemoCol').className='col-3'">col-3 (25%)</button>
+                        <button class="btn btn-outline-info"
+                            onclick="document.getElementById('gridDemoCol').className='col-4'">col-4 (33%)</button>
+                        <button class="btn btn-outline-info"
+                            onclick="document.getElementById('gridDemoCol').className='col-6'">col-6 (50%)</button>
+                        <button class="btn btn-outline-info"
+                            onclick="document.getElementById('gridDemoCol').className='col-8'">col-8 (67%)</button>
+                        <button class="btn btn-outline-info"
+                            onclick="document.getElementById('gridDemoCol').className='col-10'">col-10 (83%)</button>
+                    </div>
+                    <div class="row g-2" id="gridPlayground">
+                        <div id="gridDemoCol" class="col-6" style="transition:all 0.3s">
+                            <div class="grid-demo p-3 fs-6">← I resize!</div>
                         </div>
-                        <div class="editor-wrapper">
-                            <div class="row g-3">
-                                <div class="col-md-6">
-                                    <div class="code-editor-box">
-                                        <div class="editor-tab"><i class="bi bi-code-slash"></i> HTML</div>
-                                        <textarea class="code-editor" id="editor-grid" spellcheck="false"><div class="container">
-  <div class="row g-3">
-    <div class="col-md-8">
-      <div class="p-3 bg-primary text-white rounded">
-        Main Content (col-md-8)
-      </div>
-    </div>
-    <div class="col-md-4">
-      <div class="p-3 bg-success text-white rounded">
-        Sidebar (col-md-4)
-      </div>
-    </div>
-  </div>
-  <div class="row g-3 mt-2">
-    <div class="col-4">
-      <div class="p-3 bg-info text-white rounded text-center">1/3</div>
-    </div>
-    <div class="col-4">
-      <div class="p-3 bg-warning text-dark rounded text-center">1/3</div>
-    </div>
-    <div class="col-4">
-      <div class="p-3 bg-danger text-white rounded text-center">1/3</div>
-    </div>
-  </div>
-</div></textarea>
+                        <div class="col" style="transition:all 0.3s">
+                            <div class="grid-demo p-3 fs-6"
+                                style="background:rgba(255,200,0,0.12);border-color:rgba(255,200,0,0.3);color:#ffd700;">
+                                Rest fills up →</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ==================== UNIT III: LAYOUT COMPONENTS ==================== -->
+
+        <!-- Navbar -->
+        <section class="module-section fade-in" id="mod-navbar">
+            <div class="container">
+                <div class="mb-4">
+                    <small class="text-info text-uppercase fw-bold" style="letter-spacing:1px;">Unit III — Layout
+                        Components</small>
+                    <h2 class="fw-bold mt-1"><i class="bi bi-layout-text-sidebar-reverse text-accent"></i> Navbar &amp;
+                        Navigation</h2>
+                    <p class="text-secondary">Bootstrap's responsive navigation bar — the header of almost every
+                        website.</p>
+                </div>
+
+                <div class="card bg-dark border-info border-start border-3 p-4 mb-4">
+                    <h5>📚 Understanding Navbars</h5>
+                    <p class="text-secondary">A navbar starts with <code>.navbar</code> and
+                        <code>.navbar-expand-{breakpoint}</code>. Key parts: <code>.navbar-brand</code> (logo),
+                        <code>.navbar-toggler</code> (hamburger), <code>.navbar-nav</code> + <code>.nav-link</code>
+                        (links).</p>
+                    <p class="text-secondary">Navigation elements: <code>.nav</code> (basic), <code>.nav-tabs</code>
+                        (tabbed), <code>.nav-pills</code> (pill-style).</p>
+                    <div class="alert alert-info py-2 mt-3 small">💡 The toggler uses
+                        <code>data-bs-toggle="collapse"</code> pointing to the <code>.navbar-collapse</code> element's
+                        ID.</div>
+                </div>
+
+                <div class="row g-4">
+                    <div class="col-lg-6">
+                        <div class="card bg-dark border-secondary p-4">
+                            <h5>📖 Key Classes</h5>
+                            <ul class="list-unstyled mb-0">
+                                <li class="py-2 border-bottom border-secondary"><code>.navbar</code> — Base wrapper</li>
+                                <li class="py-2 border-bottom border-secondary"><code>.navbar-expand-lg</code> — Expand
+                                    at lg breakpoint</li>
+                                <li class="py-2 border-bottom border-secondary"><code>.navbar-brand</code> — Site
+                                    logo/name</li>
+                                <li class="py-2 border-bottom border-secondary"><code>.navbar-toggler</code> — Hamburger
+                                    button</li>
+                                <li class="py-2 border-bottom border-secondary"><code>.navbar-nav</code>,
+                                    <code>.nav-link</code> — Nav links</li>
+                                <li class="py-2 border-bottom border-secondary"><code>.nav-tabs</code>,
+                                    <code>.nav-pills</code> — Inline navs</li>
+                                <li class="py-2"><code>.fixed-top</code>, <code>.sticky-top</code> — Positioning</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="card bg-dark border-secondary p-4">
+                            <h5>👀 Live Example</h5>
+                            <div class="example-preview p-3">
+                                <nav id="navbarDemo" class="navbar navbar-expand-sm bg-primary rounded mb-2"
+                                    data-bs-theme="dark">
+                                    <div class="container-fluid">
+                                        <a class="navbar-brand" href="#">MySite</a>
+                                        <div class="navbar-nav ms-auto gap-1">
+                                            <a class="nav-link active" href="#">Home</a>
+                                            <a class="nav-link" href="#">About</a>
+                                            <a class="nav-link" href="#">Contact</a>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="preview-box">
-                                        <div class="editor-tab"><i class="bi bi-eye"></i> Preview</div>
-                                        <iframe class="live-preview" id="preview-grid"></iframe>
-                                    </div>
+                                </nav>
+                                <div class="mt-2 small text-secondary">Nav pills:</div>
+                                <ul class="nav nav-pills mt-1">
+                                    <li class="nav-item"><a class="nav-link active" href="#">Active</a></li>
+                                    <li class="nav-item"><a class="nav-link" href="#">Link</a></li>
+                                    <li class="nav-item"><a class="nav-link" href="#">Link</a></li>
+                                </ul>
+                                <hr class="border-secondary my-3">
+                                <p class="small text-info mb-2">🎮 Change the navbar color!</p>
+                                <div class="d-flex gap-1 flex-wrap">
+                                    <button class="btn btn-sm btn-primary"
+                                        onclick="document.getElementById('navbarDemo').className='navbar navbar-expand-sm bg-primary rounded mb-2'">Primary</button>
+                                    <button class="btn btn-sm btn-dark"
+                                        onclick="document.getElementById('navbarDemo').className='navbar navbar-expand-sm bg-dark rounded mb-2'">Dark</button>
+                                    <button class="btn btn-sm btn-success"
+                                        onclick="document.getElementById('navbarDemo').className='navbar navbar-expand-sm bg-success rounded mb-2'">Success</button>
+                                    <button class="btn btn-sm btn-warning"
+                                        onclick="document.getElementById('navbarDemo').className='navbar navbar-expand-sm bg-warning rounded mb-2'">Warning</button>
                                 </div>
                             </div>
                         </div>
@@ -363,546 +648,1132 @@
             </div>
         </section>
 
-        <!-- Buttons Module -->
-        <section class="module-section" id="mod-buttons" data-module="buttons">
+        <!-- Dropdowns -->
+        <section class="module-section fade-in" id="mod-dropdowns">
             <div class="container">
-                <div class="module-header">
-                    <span class="module-badge">Components</span>
-                    <h2><i class="bi bi-hand-index text-accent"></i> Buttons</h2>
-                    <p class="text-muted">Buttons are the most common interactive element. Bootstrap makes them beautiful by default.</p>
+                <div class="mb-4">
+                    <small class="text-info text-uppercase fw-bold" style="letter-spacing:1px;">Unit III — Layout
+                        Components</small>
+                    <h2 class="fw-bold mt-1"><i class="bi bi-caret-down-square text-accent"></i> Dropdown Menus</h2>
+                    <p class="text-secondary">Toggleable, contextual menus for displaying lists of links and actions.
+                    </p>
+                </div>
+                <div class="card bg-dark border-info border-start border-3 p-4 mb-4">
+                    <h5>📚 Understanding Dropdowns</h5>
+                    <p class="text-secondary">A dropdown needs a <strong class="text-light">trigger</strong> (button
+                        with <code>data-bs-toggle="dropdown"</code>) and a <strong class="text-light">menu</strong>
+                        (<code>.dropdown-menu</code> with <code>.dropdown-item</code> links). Types: standard, split
+                        button (<code>.dropdown-toggle-split</code>), dropup, dropend, dropstart.</p>
+                    <div class="alert alert-info py-2 mt-3 small">💡 Dropdowns require the Bootstrap JavaScript bundle
+                        (including Popper.js).</div>
                 </div>
                 <div class="row g-4">
                     <div class="col-lg-6">
-                        <div class="glass-card p-4">
-                            <h5 class="mb-3">📖 Key Concepts</h5>
-                            <ul class="concept-list">
-                                <li><code>.btn .btn-primary</code> — Solid colored button</li>
-                                <li><code>.btn-outline-*</code> — Outlined variant</li>
-                                <li><code>.btn-lg</code>, <code>.btn-sm</code> — Size variants</li>
-                                <li><code>.btn-group</code> — Group buttons together</li>
-                                <li><code>.disabled</code> — Disable a button</li>
+                        <div class="card bg-dark border-secondary p-4">
+                            <h5>📖 Key Classes</h5>
+                            <ul class="list-unstyled mb-0">
+                                <li class="py-2 border-bottom border-secondary"><code>.dropdown</code> — Wrapper</li>
+                                <li class="py-2 border-bottom border-secondary"><code>.dropdown-toggle</code> — Trigger
+                                    button</li>
+                                <li class="py-2 border-bottom border-secondary"><code>data-bs-toggle="dropdown"</code> —
+                                    Activates JS</li>
+                                <li class="py-2 border-bottom border-secondary"><code>.dropdown-menu</code> — Menu
+                                    container</li>
+                                <li class="py-2 border-bottom border-secondary"><code>.dropdown-item</code> — Each item
+                                </li>
+                                <li class="py-2"><code>.dropup</code>, <code>.dropend</code>, <code>.dropstart</code> —
+                                    Direction</li>
                             </ul>
                         </div>
                     </div>
                     <div class="col-lg-6">
-                        <div class="glass-card p-4">
-                            <h5 class="mb-3">👀 Live Example</h5>
-                            <div class="example-preview p-3 rounded">
-                                <div class="mb-2">
-                                    <button class="btn btn-primary me-1">Primary</button>
-                                    <button class="btn btn-success me-1">Success</button>
-                                    <button class="btn btn-danger me-1">Danger</button>
+                        <div class="card bg-dark border-secondary p-4">
+                            <h5>👀 Live Example</h5>
+                            <div class="example-preview p-3">
+                                <div id="dropdownDir" class="dropdown mb-2">
+                                    <button class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown">Dropdown
+                                        Menu</button>
+                                    <ul class="dropdown-menu">
+                                        <li>
+                                            <h6 class="dropdown-header">Actions</h6>
+                                        </li>
+                                        <li><a class="dropdown-item" href="#">Action</a></li>
+                                        <li><a class="dropdown-item" href="#">Another action</a></li>
+                                        <li>
+                                            <hr class="dropdown-divider">
+                                        </li>
+                                        <li><a class="dropdown-item" href="#">Something else</a></li>
+                                    </ul>
                                 </div>
-                                <div class="mb-2">
-                                    <button class="btn btn-outline-primary me-1">Outline</button>
-                                    <button class="btn btn-outline-warning me-1">Outline</button>
+                                <div class="btn-group">
+                                    <button class="btn btn-success">Action</button>
+                                    <button class="btn btn-success dropdown-toggle dropdown-toggle-split"
+                                        data-bs-toggle="dropdown"></button>
+                                    <ul class="dropdown-menu">
+                                        <li><a class="dropdown-item" href="#">Split item</a></li>
+                                    </ul>
                                 </div>
-                                <div>
-                                    <button class="btn btn-dark btn-sm me-1">Small</button>
-                                    <button class="btn btn-dark">Default</button>
-                                    <button class="btn btn-dark btn-lg ms-1">Large</button>
+                                <hr class="border-secondary my-3">
+                                <p class="small text-info mb-2">🎮 Change dropdown direction!</p>
+                                <div class="d-flex gap-1 flex-wrap">
+                                    <button class="btn btn-outline-info btn-sm"
+                                        onclick="document.getElementById('dropdownDir').className='dropdown mb-2'">Dropdown
+                                        ↓</button>
+                                    <button class="btn btn-outline-info btn-sm"
+                                        onclick="document.getElementById('dropdownDir').className='dropup mb-2'">Dropup
+                                        ↑</button>
+                                    <button class="btn btn-outline-info btn-sm"
+                                        onclick="document.getElementById('dropdownDir').className='dropend mb-2'">Dropend
+                                        →</button>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </div>
-                <div class="mt-4">
-                    <div class="glass-card p-4">
-                        <div class="d-flex justify-content-between align-items-center mb-3">
-                            <h5 class="mb-0">🛠️ Try It Yourself</h5>
-                            <div class="d-flex gap-2">
-                                <button class="btn btn-sm btn-outline-secondary reset-btn" data-module="buttons"><i class="bi bi-arrow-counterclockwise"></i> Reset</button>
-                                <button class="btn btn-sm btn-accent complete-btn" data-module="buttons"><i class="bi bi-check-lg"></i> Mark Complete</button>
-                            </div>
-                        </div>
-                        <div class="editor-wrapper"><div class="row g-3"><div class="col-md-6">
-                            <div class="code-editor-box"><div class="editor-tab"><i class="bi bi-code-slash"></i> HTML</div>
-                                <textarea class="code-editor" id="editor-buttons" spellcheck="false"><button class="btn btn-primary btn-lg">Click Me!</button>
-<button class="btn btn-outline-success btn-lg ms-2">Outline</button>
-
-<div class="mt-3">
-  <div class="btn-group">
-    <button class="btn btn-warning">Left</button>
-    <button class="btn btn-warning">Middle</button>
-    <button class="btn btn-warning">Right</button>
-  </div>
-</div>
-
-<div class="mt-3">
-  <button class="btn btn-danger" disabled>Disabled</button>
-  <a href="#" class="btn btn-link">Link Button</a>
-</div></textarea>
-                            </div></div><div class="col-md-6"><div class="preview-box"><div class="editor-tab"><i class="bi bi-eye"></i> Preview</div>
-                            <iframe class="live-preview" id="preview-buttons"></iframe>
-                        </div></div></div></div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Cards Module -->
-        <section class="module-section" id="mod-cards" data-module="cards">
+        <!-- Button Groups -->
+        <section class="module-section fade-in" id="mod-btngroups">
             <div class="container">
-                <div class="module-header">
-                    <span class="module-badge">Components</span>
-                    <h2><i class="bi bi-card-heading text-accent"></i> Cards</h2>
-                    <p class="text-muted">Cards are flexible content containers with multiple variants and options.</p>
+                <div class="mb-4">
+                    <small class="text-info text-uppercase fw-bold" style="letter-spacing:1px;">Unit III — Layout
+                        Components</small>
+                    <h2 class="fw-bold mt-1"><i class="bi bi-segmented-nav text-accent"></i> Button Groups</h2>
+                    <p class="text-secondary">Group a series of buttons together on a single line or stack them
+                        vertically.</p>
+                </div>
+                <div class="card bg-dark border-info border-start border-3 p-4 mb-4">
+                    <h5>📚 Understanding Button Groups</h5>
+                    <p class="text-secondary">Types: <code>.btn-group</code> (horizontal), <code>.btn-toolbar</code>
+                        (multiple groups), <code>.btn-group-vertical</code> (stacked). Sizing:
+                        <code>.btn-group-lg</code> / <code>.btn-group-sm</code>.</p>
+                    <div class="alert alert-info py-2 mt-3 small">💡 Add <code>role="group"</code> and
+                        <code>aria-label</code> for accessibility.</div>
                 </div>
                 <div class="row g-4">
                     <div class="col-lg-6">
-                        <div class="glass-card p-4">
-                            <h5 class="mb-3">📖 Key Concepts</h5>
-                            <ul class="concept-list">
-                                <li><code>.card</code> — The wrapper container</li>
-                                <li><code>.card-body</code> — Main content area</li>
-                                <li><code>.card-title</code>, <code>.card-text</code> — Content elements</li>
-                                <li><code>.card-header</code>, <code>.card-footer</code> — Optional sections</li>
-                                <li><code>.card-img-top</code> — Image on top of card</li>
-                            </ul>
+                        <div class="card bg-dark border-secondary p-4">
+                            <h5>👀 Live Example</h5>
+                            <div class="example-preview p-3">
+                                <div id="btnGroupDemo" class="btn-group mb-2" role="group">
+                                    <button class="btn btn-primary">Left</button>
+                                    <button class="btn btn-primary">Middle</button>
+                                    <button class="btn btn-primary">Right</button>
+                                </div><br>
+                                <div class="btn-group-vertical" role="group">
+                                    <button class="btn btn-success btn-sm">Top</button>
+                                    <button class="btn btn-success btn-sm">Mid</button>
+                                    <button class="btn btn-success btn-sm">Bot</button>
+                                </div>
+                                <hr class="border-secondary my-3">
+                                <p class="small text-info mb-2">🎮 Change the group size!</p>
+                                <div class="d-flex gap-1 flex-wrap">
+                                    <button class="btn btn-outline-info btn-sm"
+                                        onclick="document.getElementById('btnGroupDemo').className='btn-group btn-group-sm mb-2'">Small</button>
+                                    <button class="btn btn-outline-info btn-sm"
+                                        onclick="document.getElementById('btnGroupDemo').className='btn-group mb-2'">Default</button>
+                                    <button class="btn btn-outline-info btn-sm"
+                                        onclick="document.getElementById('btnGroupDemo').className='btn-group btn-group-lg mb-2'">Large</button>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div class="col-lg-6">
-                        <div class="glass-card p-4">
-                            <h5 class="mb-3">👀 Live Example</h5>
-                            <div class="example-preview p-3 rounded">
-                                <div class="card bg-dark border-secondary" style="max-width:280px">
+                        <div class="card bg-dark border-secondary p-4">
+                            <h5>📖 Key Classes</h5>
+                            <ul class="list-unstyled mb-0">
+                                <li class="py-2 border-bottom border-secondary"><code>.btn-group</code> — Horizontal
+                                    button group</li>
+                                <li class="py-2 border-bottom border-secondary"><code>.btn-group-vertical</code> —
+                                    Vertical stacking</li>
+                                <li class="py-2 border-bottom border-secondary"><code>.btn-toolbar</code> — Group
+                                    multiple btn-groups</li>
+                                <li class="py-2"><code>.btn-group-lg</code>, <code>.btn-group-sm</code> — Sizing</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Breadcrumbs & Pagination -->
+        <section class="module-section fade-in" id="mod-navcomponents">
+            <div class="container">
+                <div class="mb-4">
+                    <small class="text-info text-uppercase fw-bold" style="letter-spacing:1px;">Unit III — Layout
+                        Components</small>
+                    <h2 class="fw-bold mt-1"><i class="bi bi-signpost-2 text-accent"></i> Breadcrumbs &amp; Pagination
+                    </h2>
+                    <p class="text-secondary">Navigation aids that help users understand where they are.</p>
+                </div>
+                <div class="card bg-dark border-info border-start border-3 p-4 mb-4">
+                    <h5>📚 Understanding Breadcrumbs &amp; Pagination</h5>
+                    <p class="text-secondary"><strong class="text-light">Breadcrumbs</strong> show the user's location:
+                        <em>Home → Products → Laptops</em>. Use <code>.breadcrumb</code> on an <code>&lt;ol&gt;</code>
+                        and <code>.breadcrumb-item</code> for each step.</p>
+                    <p class="text-secondary"><strong class="text-light">Pagination</strong> uses
+                        <code>.pagination</code>, <code>.page-item</code>, <code>.page-link</code>. Add
+                        <code>.active</code> for current page, <code>.disabled</code> for non-clickable.</p>
+                    <div class="alert alert-info py-2 mt-3 small">💡 Wrap breadcrumbs in
+                        <code>&lt;nav aria-label="breadcrumb"&gt;</code> for accessibility.</div>
+                </div>
+                <div class="card bg-dark border-secondary p-4">
+                    <h5>👀 Live Example</h5>
+                    <div class="example-preview p-3">
+                        <nav aria-label="breadcrumb">
+                            <ol class="breadcrumb mb-3">
+                                <li class="breadcrumb-item"><a href="#">Home</a></li>
+                                <li class="breadcrumb-item"><a href="#">Products</a></li>
+                                <li class="breadcrumb-item active">Laptops</li>
+                            </ol>
+                        </nav>
+                        <nav>
+                            <ul id="paginationDemo" class="pagination pagination-sm mb-0">
+                                <li class="page-item disabled"><a class="page-link" href="#">«</a></li>
+                                <li class="page-item active"><a class="page-link" href="#"
+                                        onclick="event.preventDefault();document.querySelectorAll('#paginationDemo .page-item').forEach(function(i){i.classList.remove('active')});this.parentElement.classList.add('active')">1</a>
+                                </li>
+                                <li class="page-item"><a class="page-link" href="#"
+                                        onclick="event.preventDefault();document.querySelectorAll('#paginationDemo .page-item').forEach(function(i){i.classList.remove('active')});this.parentElement.classList.add('active')">2</a>
+                                </li>
+                                <li class="page-item"><a class="page-link" href="#"
+                                        onclick="event.preventDefault();document.querySelectorAll('#paginationDemo .page-item').forEach(function(i){i.classList.remove('active')});this.parentElement.classList.add('active')">3</a>
+                                </li>
+                                <li class="page-item"><a class="page-link" href="#">»</a></li>
+                            </ul>
+                        </nav>
+                        <small class="text-info mt-2 d-block">🎮 Click the page numbers — they're interactive!</small>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Cards -->
+        <section class="module-section fade-in" id="mod-cards">
+            <div class="container">
+                <div class="mb-4">
+                    <small class="text-info text-uppercase fw-bold" style="letter-spacing:1px;">Unit III — Layout
+                        Components</small>
+                    <h2 class="fw-bold mt-1"><i class="bi bi-card-heading text-accent"></i> Cards</h2>
+                    <p class="text-secondary">Flexible content containers with headers, footers, and images.</p>
+                </div>
+                <div class="card bg-dark border-info border-start border-3 p-4 mb-4">
+                    <h5>📚 Understanding Cards</h5>
+                    <p class="text-secondary">Card parts: <code>.card</code> (wrapper), <code>.card-body</code> (main
+                        content), <code>.card-header</code>/<code>.card-footer</code> (optional),
+                        <code>.card-title</code>/<code>.card-text</code> (content), <code>.card-img-top</code> (image).
+                    </p>
+                    <p class="text-secondary">Color with <code>.text-bg-primary</code>, <code>.border-success</code>,
+                        etc. Group with <code>.card-group</code>.</p>
+                    <div class="alert alert-info py-2 mt-3 small">💡 Cards have no fixed width — they fill their parent.
+                        Use grid columns like <code>.col-md-4</code> to size them.</div>
+                </div>
+                <div class="card bg-dark border-secondary p-4">
+                    <h5>👀 Live Example</h5>
+                    <div class="example-preview p-3">
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <div class="card text-bg-primary">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Primary Card</h5>
+                                        <p class="card-text">Styled with text-bg-primary.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="card border-warning">
                                     <div class="card-header">Featured</div>
                                     <div class="card-body">
                                         <h5 class="card-title">Card Title</h5>
-                                        <p class="card-text small">Some quick example text to build on the card title.</p>
-                                        <a href="#" class="btn btn-primary btn-sm">Go somewhere</a>
+                                        <p class="card-text">With header and footer.</p><button
+                                            class="btn btn-warning btn-sm">Action</button>
                                     </div>
-                                    <div class="card-footer text-muted small">Last updated 3 mins ago</div>
+                                    <div class="card-footer text-secondary small">Last updated 3 min ago</div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </div>
-                <div class="mt-4">
-                    <div class="glass-card p-4">
-                        <div class="d-flex justify-content-between align-items-center mb-3">
-                            <h5 class="mb-0">🛠️ Try It Yourself</h5>
-                            <div class="d-flex gap-2">
-                                <button class="btn btn-sm btn-outline-secondary reset-btn" data-module="cards"><i class="bi bi-arrow-counterclockwise"></i> Reset</button>
-                                <button class="btn btn-sm btn-accent complete-btn" data-module="cards"><i class="bi bi-check-lg"></i> Mark Complete</button>
+                        <hr class="border-secondary my-3">
+                        <p class="small text-info mb-2">🎮 Change the card color!</p>
+                        <div class="d-flex gap-1 mb-2 flex-wrap">
+                            <button class="btn btn-sm btn-primary"
+                                onclick="document.getElementById('cardDemo').className='card text-bg-primary'">Primary</button>
+                            <button class="btn btn-sm btn-success"
+                                onclick="document.getElementById('cardDemo').className='card text-bg-success'">Success</button>
+                            <button class="btn btn-sm btn-danger"
+                                onclick="document.getElementById('cardDemo').className='card text-bg-danger'">Danger</button>
+                            <button class="btn btn-sm btn-dark"
+                                onclick="document.getElementById('cardDemo').className='card text-bg-dark border-info'">Dark+Border</button>
+                            <button class="btn btn-sm btn-outline-warning"
+                                onclick="document.getElementById('cardDemo').className='card border-warning'">Outline</button>
+                        </div>
+                        <div id="cardDemo" class="card text-bg-primary" style="max-width:300px">
+                            <div class="card-body">
+                                <h5 class="card-title">I Change Style!</h5>
+                                <p class="card-text">Click buttons above to restyle me.</p>
                             </div>
                         </div>
-                        <div class="editor-wrapper"><div class="row g-3"><div class="col-md-6">
-                            <div class="code-editor-box"><div class="editor-tab"><i class="bi bi-code-slash"></i> HTML</div>
-                                <textarea class="code-editor" id="editor-cards" spellcheck="false"><div class="row g-3">
-  <div class="col-6">
-    <div class="card text-bg-primary">
-      <div class="card-body">
-        <h5 class="card-title">Primary Card</h5>
-        <p class="card-text">A card with primary theme.</p>
-      </div>
-    </div>
-  </div>
-  <div class="col-6">
-    <div class="card text-bg-success">
-      <div class="card-body">
-        <h5 class="card-title">Success Card</h5>
-        <p class="card-text">A card with success theme.</p>
-      </div>
-    </div>
-  </div>
-</div>
-
-<div class="card mt-3 border-warning">
-  <div class="card-header">Customized Card</div>
-  <div class="card-body">
-    <h5 class="card-title">Try adding more cards!</h5>
-    <p class="card-text">Experiment with different color schemes.</p>
-    <button class="btn btn-warning">Action</button>
-  </div>
-</div></textarea>
-                            </div></div><div class="col-md-6"><div class="preview-box"><div class="editor-tab"><i class="bi bi-eye"></i> Preview</div>
-                            <iframe class="live-preview" id="preview-cards"></iframe>
-                        </div></div></div></div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Forms Module -->
-        <section class="module-section" id="mod-forms" data-module="forms">
+        <!-- Badges & Spinners -->
+        <section class="module-section fade-in" id="mod-badges">
             <div class="container">
-                <div class="module-header">
-                    <span class="module-badge">Components</span>
-                    <h2><i class="bi bi-input-cursor-text text-accent"></i> Forms</h2>
-                    <p class="text-muted">Bootstrap forms are beautifully styled with minimal effort. Learn form controls, layouts, and validation.</p>
+                <div class="mb-4">
+                    <small class="text-info text-uppercase fw-bold" style="letter-spacing:1px;">Unit III — Layout
+                        Components</small>
+                    <h2 class="fw-bold mt-1"><i class="bi bi-bookmark-star text-accent"></i> Badges &amp; Spinners</h2>
+                    <p class="text-secondary">Small status indicators, counters, and loading animations.</p>
+                </div>
+                <div class="card bg-dark border-info border-start border-3 p-4 mb-4">
+                    <h5>📚 Understanding Badges &amp; Spinners</h5>
+                    <p class="text-secondary"><strong class="text-light">Badges:</strong> <code>.badge</code> +
+                        <code>.text-bg-primary</code>. Use <code>.rounded-pill</code> for pill shape. Place inside
+                        headings or buttons for counts.</p>
+                    <p class="text-secondary"><strong class="text-light">Spinners:</strong> <code>.spinner-border</code>
+                        (rotating) or <code>.spinner-grow</code> (pulsing). Size with <code>.spinner-border-sm</code>.
+                        Color with <code>.text-primary</code>.</p>
+                </div>
+                <div class="card bg-dark border-secondary p-4">
+                    <h5>👀 Live Example</h5>
+                    <div class="example-preview p-3">
+                        <h5>Notifications <span class="badge text-bg-danger">4</span></h5>
+                        <div class="mb-2">
+                            <span class="badge text-bg-primary me-1">Primary</span>
+                            <span class="badge text-bg-success me-1">Success</span>
+                            <span class="badge rounded-pill text-bg-warning me-1">Pill</span>
+                            <span class="badge rounded-pill text-bg-info">Tag</span>
+                        </div>
+                        <div class="mt-2">
+                            <div class="spinner-border spinner-border-sm text-primary me-2"></div>
+                            <div class="spinner-border text-success me-2"></div>
+                            <div class="spinner-grow spinner-grow-sm text-danger me-2"></div>
+                            <div class="spinner-grow text-warning"></div>
+                        </div>
+                        <hr class="border-secondary my-3">
+                        <p class="small text-info mb-2">🎮 Click to see the badge count change!</p>
+                        <button class="btn btn-primary btn-sm"
+                            onclick="var b=document.getElementById('badgeCount');b.textContent=parseInt(b.textContent)+1">
+                            Messages <span id="badgeCount" class="badge text-bg-danger">0</span>
+                        </button>
+                        <button class="btn btn-outline-secondary btn-sm ms-2"
+                            onclick="document.getElementById('badgeCount').textContent='0'">Reset</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ==================== UNIT IV: BOOTSTRAP CSS ==================== -->
+
+        <!-- Typography -->
+        <section class="module-section fade-in" id="mod-typography">
+            <div class="container">
+                <div class="mb-4">
+                    <small class="text-info text-uppercase fw-bold" style="letter-spacing:1px;">Unit IV — Bootstrap
+                        CSS</small>
+                    <h2 class="fw-bold mt-1"><i class="bi bi-fonts text-accent"></i> Typography</h2>
+                    <p class="text-secondary">Headings, body text, alignment, and typographic elements.</p>
+                </div>
+                <div class="card bg-dark border-info border-start border-3 p-4 mb-4">
+                    <h5>📚 Understanding Typography</h5>
+                    <p class="text-secondary">Display headings (<code>.display-1</code> to <code>.display-6</code>),
+                        lead paragraph (<code>.lead</code>), font weight (<code>.fw-bold</code>), font style
+                        (<code>.fst-italic</code>), text transform (<code>.text-uppercase</code>), font sizes
+                        (<code>.fs-1</code> to <code>.fs-6</code>), blockquotes (<code>.blockquote</code>), lists
+                        (<code>.list-unstyled</code>, <code>.list-inline</code>).</p>
+                </div>
+                <div class="card bg-dark border-secondary p-4">
+                    <h5>👀 Live Example</h5>
+                    <div class="example-preview p-3">
+                        <h1 class="display-5">Display Heading</h1>
+                        <p class="lead">This is a lead paragraph — it stands out.</p>
+                        <p class="fw-bold">Bold text using <code>.fw-bold</code></p>
+                        <p class="fst-italic text-secondary">Italic &amp; muted combined</p>
+                        <p class="text-uppercase fs-6">uppercased small text</p>
+                        <blockquote class="blockquote small">
+                            <p>"Learning is a treasure."</p>
+                        </blockquote>
+                    </div>
+                </div>
+
+                <!-- PLAYGROUND: Typography -->
+                <div class="playground-card">
+                    <h5 class="text-info mb-3">Style This Text Live!</h5>
+                    <p class="text-secondary small mb-3">Click buttons to toggle Bootstrap typography classes on the
+                        text below. Try combining multiple!</p>
+                    <p id="typographyDemo" class="p-3 bg-dark rounded border border-secondary fs-5"
+                        style="transition:all 0.3s;">Click the buttons below to style me!</p>
+                    <div class="d-flex gap-2 flex-wrap mt-3">
+                        <button class="btn btn-outline-info"
+                            onclick="document.getElementById('typographyDemo').classList.toggle('fw-bold')">Toggle
+                            Bold</button>
+                        <button class="btn btn-outline-info"
+                            onclick="document.getElementById('typographyDemo').classList.toggle('fst-italic')">Toggle
+                            Italic</button>
+                        <button class="btn btn-outline-info"
+                            onclick="document.getElementById('typographyDemo').classList.toggle('text-uppercase')">Toggle
+                            Uppercase</button>
+                        <button class="btn btn-outline-info"
+                            onclick="document.getElementById('typographyDemo').classList.toggle('lead')">Toggle
+                            Lead</button>
+                        <button class="btn btn-outline-info"
+                            onclick="document.getElementById('typographyDemo').classList.toggle('text-center')">Toggle
+                            Center</button>
+                        <button class="btn btn-outline-warning"
+                            onclick="document.getElementById('typographyDemo').classList.toggle('text-success')">Toggle
+                            Color</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Tables & Code -->
+        <section class="module-section fade-in" id="mod-tables">
+            <div class="container">
+                <div class="mb-4">
+                    <small class="text-info text-uppercase fw-bold" style="letter-spacing:1px;">Unit IV — Bootstrap
+                        CSS</small>
+                    <h2 class="fw-bold mt-1"><i class="bi bi-table text-accent"></i> Tables &amp; Code</h2>
+                    <p class="text-secondary">Beautifully styled tables and code display elements.</p>
+                </div>
+                <div class="card bg-dark border-info border-start border-3 p-4 mb-4">
+                    <h5>📚 Understanding Tables</h5>
+                    <p class="text-secondary">Add <code>.table</code> to style any <code>&lt;table&gt;</code>. Variants:
+                        <code>.table-striped</code> (zebra), <code>.table-hover</code> (highlight on hover),
+                        <code>.table-bordered</code>, <code>.table-sm</code> (compact), <code>.table-dark</code>. Make
+                        responsive with <code>.table-responsive</code> wrapper.</p>
+                    <p class="text-secondary">Code display: <code>&lt;code&gt;</code> (inline), <code>&lt;pre&gt;</code>
+                        (block), <code>&lt;kbd&gt;</code> (keyboard input).</p>
+                </div>
+                <div class="card bg-dark border-secondary p-4">
+                    <h5>👀 Live Example</h5>
+                    <div class="example-preview p-3">
+                        <div class="table-responsive">
+                            <table id="tableDemo" class="table table-striped table-hover table-sm">
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Name</th>
+                                        <th>Subject</th>
+                                        <th>Grade</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>1</td>
+                                        <td>Alice</td>
+                                        <td>Bootstrap</td>
+                                        <td><span class="badge text-bg-success">A+</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>2</td>
+                                        <td>Bob</td>
+                                        <td>CSS</td>
+                                        <td><span class="badge text-bg-primary">A</span></td>
+                                    </tr>
+                                    <tr class="table-warning">
+                                        <td>3</td>
+                                        <td>Carol</td>
+                                        <td>JavaScript</td>
+                                        <td><span class="badge text-bg-warning">B+</span></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <p class="small mb-0">Press <kbd>Ctrl</kbd> + <kbd>S</kbd> to save. Use <code>.table</code>
+                            class on tables.</p>
+                    </div>
+                </div>
+
+                <!-- PLAYGROUND: Tables -->
+                <div class="playground-card">
+                    <h5 class="text-info mb-3">Customize the Table Above!</h5>
+                    <p class="text-secondary small mb-3">Toggle different table styles and watch the table transform
+                        instantly.</p>
+                    <div class="d-flex gap-2 flex-wrap">
+                        <button class="btn btn-outline-info"
+                            onclick="document.getElementById('tableDemo').classList.toggle('table-striped')">Toggle
+                            Striped</button>
+                        <button class="btn btn-outline-info"
+                            onclick="document.getElementById('tableDemo').classList.toggle('table-hover')">Toggle
+                            Hover</button>
+                        <button class="btn btn-outline-info"
+                            onclick="document.getElementById('tableDemo').classList.toggle('table-bordered')">Toggle
+                            Bordered</button>
+                        <button class="btn btn-outline-warning"
+                            onclick="document.getElementById('tableDemo').classList.toggle('table-dark')">Toggle
+                            Dark</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Forms -->
+        <section class="module-section fade-in" id="mod-forms">
+            <div class="container">
+                <div class="mb-4">
+                    <small class="text-info text-uppercase fw-bold" style="letter-spacing:1px;">Unit IV — Bootstrap
+                        CSS</small>
+                    <h2 class="fw-bold mt-1"><i class="bi bi-input-cursor-text text-accent"></i> Forms</h2>
+                    <p class="text-secondary">Bootstrap forms — inputs, selects, checkboxes, and more.</p>
+                </div>
+                <div class="card bg-dark border-info border-start border-3 p-4 mb-4">
+                    <h5>📚 Understanding Forms</h5>
+                    <p class="text-secondary">Core classes: <code>.form-control</code> (inputs/textareas),
+                        <code>.form-label</code> (labels), <code>.form-select</code> (dropdowns),
+                        <code>.form-check</code> (checkboxes/radios), <code>.form-floating</code> (floating labels),
+                        <code>.input-group</code> (input with addons). Sizing:
+                        <code>.form-control-lg</code>/<code>.form-control-sm</code>.</p>
+                </div>
+                <div class="card bg-dark border-secondary p-4">
+                    <h5>👀 Live Example</h5>
+                    <div class="example-preview p-3">
+                        <div id="formDemo">
+                            <div class="mb-2"><label class="form-label small">Email</label><input type="email"
+                                    class="form-control form-control-sm" placeholder="you@example.com"></div>
+                            <div class="mb-2"><label class="form-label small">Select</label><select
+                                    class="form-select form-select-sm">
+                                    <option>Option 1</option>
+                                    <option>Option 2</option>
+                                </select></div>
+                            <div class="input-group input-group-sm mb-2"><span class="input-group-text">@</span><input
+                                    type="text" class="form-control" placeholder="Username"></div>
+                            <div class="form-check"><input class="form-check-input" type="checkbox" checked><label
+                                    class="form-check-label small">Remember me</label></div>
+                            <div class="form-check form-switch mt-1"><input class="form-check-input"
+                                    type="checkbox"><label class="form-check-label small">Dark mode</label></div>
+                            <button class="btn btn-primary btn-sm mt-2">Submit</button>
+                        </div>
+                        <hr class="border-secondary my-3">
+                        <p class="small text-info mb-2">🎮 Change form size!</p>
+                        <div class="d-flex gap-1 flex-wrap">
+                            <button class="btn btn-outline-info btn-sm"
+                                onclick="document.querySelectorAll('#formDemo .form-control, #formDemo .form-select').forEach(function(el){el.className=el.className.replace(/form-control-\w+|form-select-\w+/g,'')+'  form-control-sm'})">Small</button>
+                            <button class="btn btn-outline-info btn-sm"
+                                onclick="document.querySelectorAll('#formDemo .form-control, #formDemo .form-select').forEach(function(el){el.className=el.className.replace(/form-control-\w+|form-select-\w+/g,'')})">Default</button>
+                            <button class="btn btn-outline-info btn-sm"
+                                onclick="document.querySelectorAll('#formDemo .form-control, #formDemo .form-select').forEach(function(el){el.className=el.className.replace(/form-control-\w+|form-select-\w+/g,'')+'  form-control-lg'})">Large</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Buttons -->
+        <section class="module-section fade-in" id="mod-buttons">
+            <div class="container">
+                <div class="mb-4">
+                    <small class="text-info text-uppercase fw-bold" style="letter-spacing:1px;">Unit IV — Bootstrap
+                        CSS</small>
+                    <h2 class="fw-bold mt-1"><i class="bi bi-hand-index text-accent"></i> Buttons</h2>
+                    <p class="text-secondary">The most common interactive element, with many styles and sizes.</p>
+                </div>
+                <div class="card bg-dark border-info border-start border-3 p-4 mb-4">
+                    <h5>📚 Understanding Buttons</h5>
+                    <p class="text-secondary">Every button needs <code>.btn</code> + a modifier like
+                        <code>.btn-primary</code>. Outline: <code>.btn-outline-*</code>. Sizes: <code>.btn-lg</code>,
+                        <code>.btn-sm</code>. Full-width: wrap in <code>.d-grid</code>. Disable: <code>disabled</code>
+                        attribute. Toggle: <code>data-bs-toggle="button"</code>.</p>
+                </div>
+                <div class="card bg-dark border-secondary p-4">
+                    <h5>👀 Live Example</h5>
+                    <div class="example-preview p-3">
+                        <div class="mb-2">
+                            <button class="btn btn-primary me-1">Primary</button>
+                            <button class="btn btn-success me-1">Success</button>
+                            <button class="btn btn-danger me-1">Danger</button>
+                            <button class="btn btn-warning">Warning</button>
+                        </div>
+                        <div class="mb-2">
+                            <button class="btn btn-outline-primary me-1">Outline</button>
+                            <button class="btn btn-outline-info me-1">Outline</button>
+                        </div>
+                        <div class="mb-3">
+                            <button class="btn btn-dark btn-sm me-1">Small</button>
+                            <button class="btn btn-dark">Default</button>
+                            <button class="btn btn-dark btn-lg ms-1">Large</button>
+                        </div>
+                        <!-- Interactive Button Demo -->
+                        <p class="small text-info mb-2">🎮 Click a color to change the button below!</p>
+                        <div class="d-flex gap-1 mb-2 flex-wrap">
+                            <button class="btn btn-sm btn-primary"
+                                onclick="document.getElementById('demoBtn').className='btn btn-lg btn-primary'">Primary</button>
+                            <button class="btn btn-sm btn-success"
+                                onclick="document.getElementById('demoBtn').className='btn btn-lg btn-success'">Success</button>
+                            <button class="btn btn-sm btn-danger"
+                                onclick="document.getElementById('demoBtn').className='btn btn-lg btn-danger'">Danger</button>
+                            <button class="btn btn-sm btn-warning"
+                                onclick="document.getElementById('demoBtn').className='btn btn-lg btn-warning'">Warning</button>
+                            <button class="btn btn-sm btn-info"
+                                onclick="document.getElementById('demoBtn').className='btn btn-lg btn-info'">Info</button>
+                            <button class="btn btn-sm btn-outline-primary"
+                                onclick="document.getElementById('demoBtn').className='btn btn-lg btn-outline-primary'">Outline</button>
+                        </div>
+                        <div class="text-center p-3 bg-dark rounded">
+                            <button id="demoBtn" class="btn btn-lg btn-primary">I Change Color! 🎨</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Images & Icons -->
+        <section class="module-section fade-in" id="mod-images">
+            <div class="container">
+                <div class="mb-4">
+                    <small class="text-info text-uppercase fw-bold" style="letter-spacing:1px;">Unit IV — Bootstrap
+                        CSS</small>
+                    <h2 class="fw-bold mt-1"><i class="bi bi-image text-accent"></i> Images &amp; Icons</h2>
+                    <p class="text-secondary">Responsive images, shapes, and Bootstrap Icons.</p>
+                </div>
+                <div class="card bg-dark border-info border-start border-3 p-4 mb-4">
+                    <h5>📚 Understanding Images &amp; Icons</h5>
+                    <p class="text-secondary">Image classes: <code>.img-fluid</code> (responsive), <code>.rounded</code>
+                        (rounded corners), <code>.rounded-circle</code> (circular), <code>.img-thumbnail</code>
+                        (bordered frame). Icons: use <code>&lt;i class="bi bi-heart"&gt;</code>, size with
+                        <code>.fs-*</code>, color with <code>.text-*</code>.</p>
+                </div>
+                <div class="card bg-dark border-secondary p-4">
+                    <h5>👀 Live Example</h5>
+                    <div class="example-preview p-3">
+                        <div class="d-flex gap-2 align-items-center mb-3">
+                            <img src="https://via.placeholder.com/60" class="rounded" alt="rounded">
+                            <img src="https://via.placeholder.com/60" class="rounded-circle" alt="circle">
+                            <img src="https://via.placeholder.com/60" class="img-thumbnail" alt="thumbnail">
+                        </div>
+                        <div class="d-flex gap-3 align-items-center mb-3">
+                            <i class="bi bi-heart-fill text-danger fs-3"></i>
+                            <i class="bi bi-star-fill text-warning fs-3"></i>
+                            <i class="bi bi-house-fill text-primary fs-3"></i>
+                            <i class="bi bi-gear-fill text-info fs-3"></i>
+                            <i class="bi bi-person-fill text-success fs-3"></i>
+                        </div>
+                        <button class="btn btn-primary btn-sm"><i class="bi bi-download"></i> Download</button>
+                        <button class="btn btn-success btn-sm"><i class="bi bi-check-lg"></i> Approve</button>
+                        <button class="btn btn-outline-danger btn-sm"><i class="bi bi-trash"></i> Delete</button>
+                        <hr class="border-secondary my-3">
+                        <p class="small text-info mb-2">🎮 Change the image shape!</p>
+                        <div class="d-flex gap-3 align-items-center">
+                            <img id="imgDemo" src="https://via.placeholder.com/80" class="rounded" alt="shape demo"
+                                style="transition:all 0.3s">
+                            <div class="d-flex flex-column gap-1">
+                                <button class="btn btn-outline-info btn-sm"
+                                    onclick="document.getElementById('imgDemo').className='rounded'">Rounded</button>
+                                <button class="btn btn-outline-info btn-sm"
+                                    onclick="document.getElementById('imgDemo').className='rounded-circle'">Circle</button>
+                                <button class="btn btn-outline-info btn-sm"
+                                    onclick="document.getElementById('imgDemo').className='img-thumbnail'">Thumbnail</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ==================== UNIT V: JS PLUGINS ==================== -->
+
+        <!-- Modals -->
+        <section class="module-section fade-in" id="mod-modals">
+            <div class="container">
+                <div class="mb-4">
+                    <small class="text-info text-uppercase fw-bold" style="letter-spacing:1px;">Unit V — JavaScript
+                        Plugins</small>
+                    <h2 class="fw-bold mt-1"><i class="bi bi-window-stack text-accent"></i> Modals</h2>
+                    <p class="text-secondary">Dialog boxes and pop-up windows triggered by user interaction.</p>
+                </div>
+                <div class="card bg-dark border-info border-start border-3 p-4 mb-4">
+                    <h5>📚 Understanding Modals</h5>
+                    <p class="text-secondary">A modal has a <strong class="text-light">trigger</strong>
+                        (<code>data-bs-toggle="modal"</code> + <code>data-bs-target="#id"</code>) and the <strong
+                            class="text-light">modal element</strong>. Structure: <code>.modal</code> →
+                        <code>.modal-dialog</code> → <code>.modal-content</code> →
+                        <code>.modal-header</code>/<code>.modal-body</code>/<code>.modal-footer</code>.</p>
+                    <p class="text-secondary">Sizes: <code>.modal-sm</code>, <code>.modal-lg</code>,
+                        <code>.modal-xl</code>. Center: <code>.modal-dialog-centered</code>. Close:
+                        <code>data-bs-dismiss="modal"</code>.</p>
+                </div>
+                <div class="card bg-dark border-secondary p-4 text-center">
+                    <h5>👀 Click to Demo!</h5>
+                    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#demoModal">Open Modal <i
+                            class="bi bi-box-arrow-up-right"></i></button>
+                </div>
+                <!-- Modal -->
+                <div class="modal fade" id="demoModal" tabindex="-1">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title">🎉 Modal Demo</h5><button type="button" class="btn-close"
+                                    data-bs-dismiss="modal"></button>
+                            </div>
+                            <div class="modal-body">
+                                <p>This is a Bootstrap modal! It overlays the page with a dark backdrop.</p>
+                                <p class="text-secondary small">The <code>data-bs-dismiss="modal"</code> attribute
+                                    closes it automatically.</p>
+                            </div>
+                            <div class="modal-footer"><button class="btn btn-secondary"
+                                    data-bs-dismiss="modal">Close</button><button class="btn btn-primary"
+                                    data-bs-dismiss="modal">Got it!</button></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Carousel -->
+        <section class="module-section fade-in" id="mod-carousel">
+            <div class="container">
+                <div class="mb-4">
+                    <small class="text-info text-uppercase fw-bold" style="letter-spacing:1px;">Unit V — JavaScript
+                        Plugins</small>
+                    <h2 class="fw-bold mt-1"><i class="bi bi-film text-accent"></i> Carousel</h2>
+                    <p class="text-secondary">A slideshow component for cycling through content.</p>
+                </div>
+                <div class="card bg-dark border-info border-start border-3 p-4 mb-4">
+                    <h5>📚 Understanding Carousels</h5>
+                    <p class="text-secondary">Structure: <code>.carousel .slide</code> → <code>.carousel-inner</code> →
+                        <code>.carousel-item</code> (one must be <code>.active</code>). Add
+                        <code>.carousel-control-prev/next</code> for arrows, <code>.carousel-indicators</code> for dots,
+                        <code>.carousel-caption</code> for text overlay.</p>
+                    <p class="text-secondary">Auto-play: <code>data-bs-ride="carousel"</code>. Speed:
+                        <code>data-bs-interval="3000"</code>. Fade: <code>.carousel-fade</code>.</p>
+                </div>
+                <div class="card bg-dark border-secondary p-4">
+                    <h5>👀 Live Example</h5>
+                    <div id="demoCarousel" class="carousel slide" data-bs-ride="carousel">
+                        <div class="carousel-indicators">
+                            <button data-bs-target="#demoCarousel" data-bs-slide-to="0" class="active"></button>
+                            <button data-bs-target="#demoCarousel" data-bs-slide-to="1"></button>
+                            <button data-bs-target="#demoCarousel" data-bs-slide-to="2"></button>
+                        </div>
+                        <div class="carousel-inner rounded">
+                            <div class="carousel-item active">
+                                <div class="p-5 bg-primary text-white text-center" style="min-height:180px">
+                                    <h3>Slide 1</h3>
+                                    <p>First slide content</p>
+                                </div>
+                            </div>
+                            <div class="carousel-item">
+                                <div class="p-5 bg-success text-white text-center" style="min-height:180px">
+                                    <h3>Slide 2</h3>
+                                    <p>Second slide content</p>
+                                </div>
+                            </div>
+                            <div class="carousel-item">
+                                <div class="p-5 bg-danger text-white text-center" style="min-height:180px">
+                                    <h3>Slide 3</h3>
+                                    <p>Third slide content</p>
+                                </div>
+                            </div>
+                        </div>
+                        <button class="carousel-control-prev" data-bs-target="#demoCarousel" data-bs-slide="prev"><span
+                                class="carousel-control-prev-icon"></span></button>
+                        <button class="carousel-control-next" data-bs-target="#demoCarousel" data-bs-slide="next"><span
+                                class="carousel-control-next-icon"></span></button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Collapse & Tabs -->
+        <section class="module-section fade-in" id="mod-collapse">
+            <div class="container">
+                <div class="mb-4">
+                    <small class="text-info text-uppercase fw-bold" style="letter-spacing:1px;">Unit V — JavaScript
+                        Plugins</small>
+                    <h2 class="fw-bold mt-1"><i class="bi bi-arrows-collapse text-accent"></i> Collapse, Accordion &amp;
+                        Tabs</h2>
+                    <p class="text-secondary">Toggle content visibility with collapse, organize with tabs.</p>
+                </div>
+                <div class="card bg-dark border-info border-start border-3 p-4 mb-4">
+                    <h5>📚 Understanding Collapse &amp; Tabs</h5>
+                    <p class="text-secondary"><strong class="text-light">Collapse:</strong> Use
+                        <code>data-bs-toggle="collapse"</code> + <code>data-bs-target="#id"</code>. <strong
+                            class="text-light">Accordion:</strong> <code>.accordion</code> with
+                        <code>.accordion-item</code> panels; use <code>data-bs-parent</code> for single-open behavior.
+                    </p>
+                    <p class="text-secondary"><strong class="text-light">Tabs:</strong> <code>.nav-tabs</code> +
+                        <code>data-bs-toggle="tab"</code> on links, <code>.tab-content</code> + <code>.tab-pane</code>
+                        for panels.</p>
+                </div>
+                <div class="card bg-dark border-secondary p-4">
+                    <h5>👀 Live Example</h5>
+                    <div class="example-preview p-3">
+                        <!-- Collapse -->
+                        <button class="btn btn-primary btn-sm mb-2" data-bs-toggle="collapse"
+                            data-bs-target="#collapseDemo">Toggle Content</button>
+                        <div class="collapse mb-3" id="collapseDemo">
+                            <div class="card card-body">This content is collapsible! 🎉</div>
+                        </div>
+                        <!-- Accordion -->
+                        <div class="accordion mb-3" id="demoAccordion">
+                            <div class="accordion-item">
+                                <h2 class="accordion-header"><button class="accordion-button" data-bs-toggle="collapse"
+                                        data-bs-target="#accOne">What is Bootstrap?</button></h2>
+                                <div id="accOne" class="accordion-collapse collapse show"
+                                    data-bs-parent="#demoAccordion">
+                                    <div class="accordion-body">A free CSS framework for responsive websites.</div>
+                                </div>
+                            </div>
+                            <div class="accordion-item">
+                                <h2 class="accordion-header"><button class="accordion-button collapsed"
+                                        data-bs-toggle="collapse" data-bs-target="#accTwo">Why use it?</button></h2>
+                                <div id="accTwo" class="accordion-collapse collapse" data-bs-parent="#demoAccordion">
+                                    <div class="accordion-body">Saves time with pre-built components and responsive
+                                        design.</div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Tabs -->
+                        <ul class="nav nav-tabs" role="tablist">
+                            <li class="nav-item"><a class="nav-link active" data-bs-toggle="tab"
+                                    href="#tabHome">Home</a></li>
+                            <li class="nav-item"><a class="nav-link" data-bs-toggle="tab" href="#tabProfile">Profile</a>
+                            </li>
+                        </ul>
+                        <div class="tab-content border border-top-0 rounded-bottom p-3">
+                            <div class="tab-pane fade show active" id="tabHome">
+                                <p>Welcome to the Home tab!</p>
+                            </div>
+                            <div class="tab-pane fade" id="tabProfile">
+                                <p>Your profile info goes here.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Tooltips & Popovers -->
+        <section class="module-section fade-in" id="mod-tooltips">
+            <div class="container">
+                <div class="mb-4">
+                    <small class="text-info text-uppercase fw-bold" style="letter-spacing:1px;">Unit V — JavaScript
+                        Plugins</small>
+                    <h2 class="fw-bold mt-1"><i class="bi bi-chat-square-dots text-accent"></i> Tooltips &amp; Popovers
+                    </h2>
+                    <p class="text-secondary">Small informational overlays on hover or click.</p>
+                </div>
+                <div class="card bg-dark border-info border-start border-3 p-4 mb-4">
+                    <h5>📚 Understanding Tooltips &amp; Popovers</h5>
+                    <p class="text-secondary"><strong class="text-light">Tooltips:</strong> Add
+                        <code>data-bs-toggle="tooltip"</code> and <code>title="text"</code>. Place with
+                        <code>data-bs-placement="top|right|bottom|left"</code>. <strong>Must initialize with
+                            JavaScript.</strong></p>
+                    <p class="text-secondary"><strong class="text-light">Popovers:</strong> Like tooltips but with title
+                        + body. Use <code>data-bs-toggle="popover"</code> + <code>data-bs-content="body"</code>. Also
+                        require JS initialization.</p>
+                    <div class="alert alert-info py-2 mt-3 small">💡 These are the only Bootstrap components that need
+                        manual JS initialization. All others work via data attributes alone.</div>
+                </div>
+                <div class="card bg-dark border-secondary p-4 text-center">
+                    <h5>👀 Hover/Click to Demo</h5>
+                    <div class="example-preview p-3">
+                        <button class="btn btn-primary btn-sm me-1" data-bs-toggle="tooltip"
+                            title="I'm a tooltip!">Tooltip</button>
+                        <button class="btn btn-success btn-sm me-1" data-bs-toggle="tooltip" data-bs-placement="right"
+                            title="Right tooltip">Right</button>
+                        <button class="btn btn-warning btn-sm" data-bs-toggle="popover" title="Popover Title"
+                            data-bs-content="This is the popover body!">Click for Popover</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Scrollspy & Alerts -->
+        <section class="module-section fade-in" id="mod-scrollspy">
+            <div class="container">
+                <div class="mb-4">
+                    <small class="text-info text-uppercase fw-bold" style="letter-spacing:1px;">Unit V — JavaScript
+                        Plugins</small>
+                    <h2 class="fw-bold mt-1"><i class="bi bi-binoculars text-accent"></i> Scrollspy, Alerts &amp; More
+                    </h2>
+                    <p class="text-secondary">Auto-highlight nav on scroll, dismissible alerts, and more plugins.</p>
+                </div>
+                <div class="card bg-dark border-info border-start border-3 p-4 mb-4">
+                    <h5>📚 Understanding Scrollspy &amp; Alerts</h5>
+                    <p class="text-secondary"><strong class="text-light">Scrollspy:</strong> Add
+                        <code>data-bs-spy="scroll"</code> + <code>data-bs-target="#navId"</code> to auto-update nav
+                        links based on scroll position.</p>
+                    <p class="text-secondary"><strong class="text-light">Alerts:</strong>
+                        <code>.alert .alert-success</code> etc. Make dismissible with <code>.alert-dismissible</code> +
+                        close button with <code>data-bs-dismiss="alert"</code>.</p>
+                    <p class="text-secondary"><strong class="text-light">Sticky positioning:</strong>
+                        <code>.sticky-top</code> replaces the old Affix plugin. Toggle buttons:
+                        <code>data-bs-toggle="button"</code>.</p>
+                </div>
+                <div class="card bg-dark border-secondary p-4">
+                    <h5>👀 Live Example</h5>
+                    <div class="example-preview p-3">
+                        <div class="alert alert-success alert-dismissible fade show py-2 small">
+                            <strong>Success!</strong> This alert can be dismissed.
+                            <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                style="font-size:0.6rem;padding:0.7rem"></button>
+                        </div>
+                        <div class="alert alert-danger py-2 small mb-2"><i class="bi bi-exclamation-triangle"></i>
+                            Danger alert — needs attention.</div>
+                        <div class="alert alert-info py-2 small mb-2"><i class="bi bi-info-circle"></i> Info alert — not
+                            dismissible.</div>
+                        <button class="btn btn-outline-primary btn-sm" data-bs-toggle="button">Toggle Me</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ==================== UNIT VI: UTILITIES ==================== -->
+
+        <!-- Flexbox -->
+        <section class="module-section fade-in" id="mod-flex">
+            <div class="container">
+                <div class="mb-4">
+                    <small class="text-info text-uppercase fw-bold" style="letter-spacing:1px;">Unit VI —
+                        Utilities</small>
+                    <h2 class="fw-bold mt-1"><i class="bi bi-distribute-horizontal text-accent"></i> Flexbox Utilities
+                    </h2>
+                    <p class="text-secondary">Powerful layout control — alignment, direction, wrapping, spacing.</p>
+                </div>
+                <div class="card bg-dark border-info border-start border-3 p-4 mb-4">
+                    <h5>📚 Understanding Flexbox</h5>
+                    <p class="text-secondary">Enable with <code>.d-flex</code>. Direction: <code>.flex-row</code>,
+                        <code>.flex-column</code>. Justify: <code>.justify-content-center/between/around</code>. Align:
+                        <code>.align-items-center</code>. Gap: <code>.gap-1</code> to <code>.gap-5</code>. Wrap:
+                        <code>.flex-wrap</code>. Grow: <code>.flex-grow-1</code>. All are responsive with breakpoint
+                        prefixes.</p>
+                </div>
+                <div class="card bg-dark border-secondary p-4">
+                    <h5>👀 Live Example</h5>
+                    <div class="example-preview p-3">
+                        <p class="small text-secondary mb-2">justify-content-between:</p>
+                        <div class="d-flex justify-content-between align-items-center mb-3 p-2 bg-dark rounded">
+                            <span class="badge text-bg-primary">Start</span>
+                            <span class="badge text-bg-warning">Center</span>
+                            <span class="badge text-bg-danger">End</span>
+                        </div>
+                        <p class="small text-secondary mb-2">flex-column:</p>
+                        <div class="d-flex flex-column gap-1 mb-3">
+                            <div class="p-2 bg-info bg-opacity-25 rounded small">Stacked item 1</div>
+                            <div class="p-2 bg-info bg-opacity-25 rounded small">Stacked item 2</div>
+                            <div class="p-2 bg-info bg-opacity-25 rounded small">Stacked item 3</div>
+                        </div>
+                        <hr class="border-secondary my-3">
+                        <p class="small text-info mb-2">🎮 Flex Playground — change alignment!</p>
+                        <div class="d-flex gap-1 mb-2 flex-wrap">
+                            <button class="btn btn-outline-info btn-sm"
+                                onclick="document.getElementById('flexDemo').className='d-flex justify-content-start gap-2 p-3 bg-dark rounded'">Start</button>
+                            <button class="btn btn-outline-info btn-sm"
+                                onclick="document.getElementById('flexDemo').className='d-flex justify-content-center gap-2 p-3 bg-dark rounded'">Center</button>
+                            <button class="btn btn-outline-info btn-sm"
+                                onclick="document.getElementById('flexDemo').className='d-flex justify-content-end gap-2 p-3 bg-dark rounded'">End</button>
+                            <button class="btn btn-outline-info btn-sm"
+                                onclick="document.getElementById('flexDemo').className='d-flex justify-content-between gap-2 p-3 bg-dark rounded'">Between</button>
+                            <button class="btn btn-outline-info btn-sm"
+                                onclick="document.getElementById('flexDemo').className='d-flex justify-content-around gap-2 p-3 bg-dark rounded'">Around</button>
+                            <button class="btn btn-outline-info btn-sm"
+                                onclick="document.getElementById('flexDemo').className='d-flex flex-column gap-2 p-3 bg-dark rounded'">Column</button>
+                        </div>
+                        <div id="flexDemo" class="d-flex justify-content-start gap-2 p-3 bg-dark rounded"
+                            style="min-height:60px;transition:all 0.3s">
+                            <span class="badge text-bg-primary p-2">A</span>
+                            <span class="badge text-bg-success p-2">B</span>
+                            <span class="badge text-bg-warning p-2">C</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Display & Float -->
+        <section class="module-section fade-in" id="mod-display">
+            <div class="container">
+                <div class="mb-4">
+                    <small class="text-info text-uppercase fw-bold" style="letter-spacing:1px;">Unit VI —
+                        Utilities</small>
+                    <h2 class="fw-bold mt-1"><i class="bi bi-display text-accent"></i> Display &amp; Float Utilities
+                    </h2>
+                    <p class="text-secondary">Control visibility, display type, and floating behavior.</p>
+                </div>
+                <div class="card bg-dark border-info border-start border-3 p-4 mb-4">
+                    <h5>📚 Understanding Display &amp; Float</h5>
+                    <p class="text-secondary">Display: <code>.d-none</code> (hide), <code>.d-block</code>,
+                        <code>.d-inline</code>, <code>.d-flex</code>, <code>.d-grid</code>. Responsive:
+                        <code>.d-none .d-md-block</code> = hidden on small, visible on medium+.</p>
+                    <p class="text-secondary">Float: <code>.float-start</code> (left), <code>.float-end</code> (right),
+                        <code>.clearfix</code> (clear floats). In modern Bootstrap, prefer Flexbox over floats for
+                        layout.</p>
+                </div>
+                <div class="card bg-dark border-secondary p-4">
+                    <h5>👀 Live Example</h5>
+                    <div class="example-preview p-3">
+                        <div class="d-inline p-2 bg-primary text-white rounded me-1 small">d-inline</div>
+                        <div class="d-inline p-2 bg-success text-white rounded small">d-inline</div>
+                        <div class="d-block p-2 bg-warning text-dark rounded mt-2 small">d-block (full width)</div>
+                        <div class="clearfix mt-2 p-2 bg-dark rounded">
+                            <div class="float-start p-1 bg-info rounded small">float-start</div>
+                            <div class="float-end p-1 bg-danger text-white rounded small">float-end</div>
+                        </div>
+                        <hr class="border-secondary my-3">
+                        <p class="small text-info mb-2">🎮 Change the display type!</p>
+                        <div class="d-flex gap-1 mb-2 flex-wrap">
+                            <button class="btn btn-outline-info btn-sm"
+                                onclick="document.getElementById('displayDemo').className='p-3 bg-info bg-opacity-25 rounded text-center d-block'">d-block</button>
+                            <button class="btn btn-outline-info btn-sm"
+                                onclick="document.getElementById('displayDemo').className='p-3 bg-info bg-opacity-25 rounded text-center d-none'">d-none
+                                (hide)</button>
+                            <button class="btn btn-outline-info btn-sm"
+                                onclick="document.getElementById('displayDemo').className='p-3 bg-info bg-opacity-25 rounded text-center d-inline'">d-inline</button>
+                            <button class="btn btn-outline-info btn-sm"
+                                onclick="document.getElementById('displayDemo').className='p-3 bg-info bg-opacity-25 rounded text-center d-inline-block'">d-inline-block</button>
+                        </div>
+                        <div id="displayDemo" class="p-3 bg-info bg-opacity-25 rounded text-center d-block">I change
+                            display type! 👀</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Utilities API -->
+        <section class="module-section fade-in" id="mod-api">
+            <div class="container">
+                <div class="mb-4">
+                    <small class="text-info text-uppercase fw-bold" style="letter-spacing:1px;">Unit VI —
+                        Utilities</small>
+                    <h2 class="fw-bold mt-1"><i class="bi bi-gear text-accent"></i> Utilities API &amp; Resources</h2>
+                    <p class="text-secondary">The Utility API and common utility patterns.</p>
+                </div>
+                <div class="card bg-dark border-info border-start border-3 p-4 mb-4">
+                    <h5>📚 Understanding Utilities API</h5>
+                    <p class="text-secondary">Bootstrap generates utility classes like <code>.mt-3</code>,
+                        <code>.text-center</code>, <code>.d-flex</code> using a Sass-based Utility API. Key patterns:
+                    </p>
+                    <ul class="text-secondary">
+                        <li><strong class="text-light">Spacing:</strong> <code>.m-*</code> (margin), <code>.p-*</code>
+                            (padding). Sides: t/b/s/e/x/y. Values: 0-5, auto.</li>
+                        <li><strong class="text-light">Sizing:</strong> <code>.w-25/50/75/100</code>, <code>.h-*</code>
+                        </li>
+                        <li><strong class="text-light">Borders:</strong> <code>.border</code>,
+                            <code>.border-primary</code>, <code>.rounded</code></li>
+                        <li><strong class="text-light">Shadows:</strong> <code>.shadow-sm</code>, <code>.shadow</code>,
+                            <code>.shadow-lg</code></li>
+                        <li><strong class="text-light">Opacity:</strong> <code>.opacity-25/50/75/100</code></li>
+                    </ul>
+                    <div class="alert alert-info py-2 mt-3 small">💡 Pattern:
+                        <code>.{property}{side}-{breakpoint}-{size}</code>. Example: <code>.mt-md-3</code> = margin-top,
+                        size 3, from md breakpoint.</div>
+                </div>
+                <div class="card bg-dark border-secondary p-4">
+                    <h5>👀 Utilities in Action</h5>
+                    <div class="example-preview p-3">
+                        <div class="p-3 mb-2 border border-primary rounded shadow-sm">border + shadow-sm</div>
+                        <div class="p-3 mb-2 bg-success bg-opacity-25 rounded shadow">bg-opacity + shadow</div>
+                        <div class="w-75 p-2 mb-2 bg-warning text-dark rounded mx-auto text-center small">w-75 mx-auto
+                            (centered, 75%)</div>
+                        <div class="d-flex gap-2">
+                            <div class="p-2 bg-primary text-white rounded opacity-100 small">100%</div>
+                            <div class="p-2 bg-primary text-white rounded opacity-75 small">75%</div>
+                            <div class="p-2 bg-primary text-white rounded opacity-50 small">50%</div>
+                            <div class="p-2 bg-primary text-white rounded opacity-25 small">25%</div>
+                        </div>
+                        <hr class="border-secondary my-3">
+                        <p class="small text-info mb-2">🎮 Change padding, shadow & border!</p>
+                        <div class="d-flex gap-1 mb-2 flex-wrap">
+                            <button class="btn btn-outline-info btn-sm"
+                                onclick="document.getElementById('utilDemo').className='bg-info bg-opacity-25 rounded text-center p-1'">p-1</button>
+                            <button class="btn btn-outline-info btn-sm"
+                                onclick="document.getElementById('utilDemo').className='bg-info bg-opacity-25 rounded text-center p-3'">p-3</button>
+                            <button class="btn btn-outline-info btn-sm"
+                                onclick="document.getElementById('utilDemo').className='bg-info bg-opacity-25 rounded text-center p-5'">p-5</button>
+                            <button class="btn btn-outline-info btn-sm"
+                                onclick="document.getElementById('utilDemo').className='bg-info bg-opacity-25 rounded text-center p-3 shadow'">+
+                                Shadow</button>
+                            <button class="btn btn-outline-info btn-sm"
+                                onclick="document.getElementById('utilDemo').className='bg-info bg-opacity-25 rounded text-center p-3 shadow-lg'">+
+                                Shadow-lg</button>
+                            <button class="btn btn-outline-info btn-sm"
+                                onclick="document.getElementById('utilDemo').className='bg-info bg-opacity-25 rounded text-center p-3 border border-3 border-warning'">+
+                                Border</button>
+                        </div>
+                        <div id="utilDemo" class="bg-info bg-opacity-25 rounded text-center p-3"
+                            style="transition:all 0.3s">Watch my padding change! 📐</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ==================== CHALLENGES ==================== -->
+        <section class="module-section fade-in" id="challenges">
+            <div class="container">
+                <div class="mb-4">
+                    <small class="text-warning text-uppercase fw-bold" style="letter-spacing:1px;">🏆 Challenges</small>
+                    <h2 class="fw-bold mt-1"><i class="bi bi-trophy text-accent"></i> Test Your Skills</h2>
+                    <p class="text-secondary">Answer these questions to test your Bootstrap knowledge!</p>
                 </div>
                 <div class="row g-4">
-                    <div class="col-lg-6">
-                        <div class="glass-card p-4">
-                            <h5 class="mb-3">📖 Key Concepts</h5>
-                            <ul class="concept-list">
-                                <li><code>.form-control</code> — Style inputs and textareas</li>
-                                <li><code>.form-label</code> — Styled labels</li>
-                                <li><code>.form-select</code> — Custom dropdowns</li>
-                                <li><code>.form-check</code> — Checkboxes and radios</li>
-                                <li><code>.form-floating</code> — Floating labels</li>
-                                <li><code>.input-group</code> — Combine inputs with addons</li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="col-lg-6">
-                        <div class="glass-card p-4">
-                            <h5 class="mb-3">👀 Live Example</h5>
-                            <div class="example-preview p-3 rounded">
-                                <div class="mb-2">
-                                    <label class="form-label small">Email</label>
-                                    <input type="email" class="form-control form-control-sm" placeholder="you@example.com">
-                                </div>
-                                <div class="mb-2">
-                                    <label class="form-label small">Select</label>
-                                    <select class="form-select form-select-sm"><option>Option 1</option><option>Option 2</option></select>
-                                </div>
-                                <div class="form-check mb-2">
-                                    <input class="form-check-input" type="checkbox" checked>
-                                    <label class="form-check-label small">Remember me</label>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="mt-4">
-                    <div class="glass-card p-4">
-                        <div class="d-flex justify-content-between align-items-center mb-3">
-                            <h5 class="mb-0">🛠️ Try It Yourself</h5>
-                            <div class="d-flex gap-2">
-                                <button class="btn btn-sm btn-outline-secondary reset-btn" data-module="forms"><i class="bi bi-arrow-counterclockwise"></i> Reset</button>
-                                <button class="btn btn-sm btn-accent complete-btn" data-module="forms"><i class="bi bi-check-lg"></i> Mark Complete</button>
-                            </div>
-                        </div>
-                        <div class="editor-wrapper"><div class="row g-3"><div class="col-md-6">
-                            <div class="code-editor-box"><div class="editor-tab"><i class="bi bi-code-slash"></i> HTML</div>
-                                <textarea class="code-editor" id="editor-forms" spellcheck="false"><form>
-  <div class="mb-3">
-    <label class="form-label">Full Name</label>
-    <input type="text" class="form-control" placeholder="John Doe">
-  </div>
-  <div class="mb-3">
-    <label class="form-label">Email</label>
-    <input type="email" class="form-control" placeholder="john@example.com">
-  </div>
-  <div class="mb-3">
-    <label class="form-label">Message</label>
-    <textarea class="form-control" rows="3" placeholder="Write something..."></textarea>
-  </div>
-  <div class="form-check mb-3">
-    <input class="form-check-input" type="checkbox">
-    <label class="form-check-label">I agree to terms</label>
-  </div>
-  <button type="button" class="btn btn-primary">Submit</button>
-</form></textarea>
-                            </div></div><div class="col-md-6"><div class="preview-box"><div class="editor-tab"><i class="bi bi-eye"></i> Preview</div>
-                            <iframe class="live-preview" id="preview-forms"></iframe>
-                        </div></div></div></div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Components Module -->
-        <section class="module-section" id="mod-components" data-module="components">
-            <div class="container">
-                <div class="module-header">
-                    <span class="module-badge">Components</span>
-                    <h2><i class="bi bi-puzzle text-accent"></i> Alerts, Badges & Progress</h2>
-                    <p class="text-muted">Quick feedback components to display messages, counters, and progress indicators.</p>
-                </div>
-                <div class="row g-4">
-                    <div class="col-lg-6">
-                        <div class="glass-card p-4">
-                            <h5 class="mb-3">📖 Key Concepts</h5>
-                            <ul class="concept-list">
-                                <li><code>.alert .alert-success</code> — Colored alert messages</li>
-                                <li><code>.badge .text-bg-primary</code> — Small count/label badges</li>
-                                <li><code>.progress</code> + <code>.progress-bar</code> — Progress indicators</li>
-                                <li><code>.spinner-border</code> — Loading spinners</li>
-                                <li><code>.alert-dismissible</code> — Closable alerts</li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="col-lg-6">
-                        <div class="glass-card p-4">
-                            <h5 class="mb-3">👀 Live Example</h5>
-                            <div class="example-preview p-3 rounded">
-                                <div class="alert alert-info py-2 small">ℹ️ This is an info alert</div>
-                                <div class="mb-2">
-                                    Notifications <span class="badge text-bg-danger">4</span>
-                                    Messages <span class="badge text-bg-primary">12</span>
-                                </div>
-                                <div class="progress" style="height:20px"><div class="progress-bar bg-success progress-bar-striped progress-bar-animated" style="width:70%">70%</div></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="mt-4">
-                    <div class="glass-card p-4">
-                        <div class="d-flex justify-content-between align-items-center mb-3">
-                            <h5 class="mb-0">🛠️ Try It Yourself</h5>
-                            <div class="d-flex gap-2">
-                                <button class="btn btn-sm btn-outline-secondary reset-btn" data-module="components"><i class="bi bi-arrow-counterclockwise"></i> Reset</button>
-                                <button class="btn btn-sm btn-accent complete-btn" data-module="components"><i class="bi bi-check-lg"></i> Mark Complete</button>
-                            </div>
-                        </div>
-                        <div class="editor-wrapper"><div class="row g-3"><div class="col-md-6">
-                            <div class="code-editor-box"><div class="editor-tab"><i class="bi bi-code-slash"></i> HTML</div>
-                                <textarea class="code-editor" id="editor-components" spellcheck="false"><div class="alert alert-success">
-  <strong>Well done!</strong> You're learning Bootstrap components.
-</div>
-<div class="alert alert-warning alert-dismissible fade show">
-  <strong>Heads up!</strong> This alert can be dismissed.
-  <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-</div>
-
-<h4>Messages <span class="badge text-bg-danger">99+</span></h4>
-
-<div class="progress mt-3" style="height: 25px;">
-  <div class="progress-bar progress-bar-striped progress-bar-animated bg-info" style="width: 45%">45%</div>
-</div>
-
-<div class="mt-3">
-  <div class="spinner-border text-primary me-2" role="status"></div>
-  <div class="spinner-grow text-success" role="status"></div>
-</div></textarea>
-                            </div></div><div class="col-md-6"><div class="preview-box"><div class="editor-tab"><i class="bi bi-eye"></i> Preview</div>
-                            <iframe class="live-preview" id="preview-components"></iframe>
-                        </div></div></div></div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Flexbox Module -->
-        <section class="module-section" id="mod-flex" data-module="flex">
-            <div class="container">
-                <div class="module-header">
-                    <span class="module-badge">Advanced</span>
-                    <h2><i class="bi bi-distribute-horizontal text-accent"></i> Flexbox Utilities</h2>
-                    <p class="text-muted">Bootstrap's flex utilities let you control layout alignment, direction, and spacing powerfully.</p>
-                </div>
-                <div class="row g-4">
-                    <div class="col-lg-6">
-                        <div class="glass-card p-4">
-                            <h5 class="mb-3">📖 Key Concepts</h5>
-                            <ul class="concept-list">
-                                <li><code>.d-flex</code> — Enable flexbox on an element</li>
-                                <li><code>.justify-content-center</code> — Center items horizontally</li>
-                                <li><code>.align-items-center</code> — Center items vertically</li>
-                                <li><code>.flex-column</code> — Stack items vertically</li>
-                                <li><code>.gap-3</code> — Add spacing between flex items</li>
-                                <li><code>.flex-wrap</code> — Allow items to wrap to next line</li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="col-lg-6">
-                        <div class="glass-card p-4">
-                            <h5 class="mb-3">👀 Live Example</h5>
-                            <div class="example-preview p-3 rounded">
-                                <div class="d-flex justify-content-between align-items-center mb-2 p-2 bg-dark rounded">
-                                    <span class="badge text-bg-primary">Start</span>
-                                    <span class="badge text-bg-warning">Center</span>
-                                    <span class="badge text-bg-danger">End</span>
-                                </div>
-                                <div class="d-flex flex-column gap-1">
-                                    <div class="p-2 bg-info bg-opacity-25 rounded small">Stacked item 1</div>
-                                    <div class="p-2 bg-info bg-opacity-25 rounded small">Stacked item 2</div>
-                                    <div class="p-2 bg-info bg-opacity-25 rounded small">Stacked item 3</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="mt-4">
-                    <div class="glass-card p-4">
-                        <div class="d-flex justify-content-between align-items-center mb-3">
-                            <h5 class="mb-0">🛠️ Try It Yourself</h5>
-                            <div class="d-flex gap-2">
-                                <button class="btn btn-sm btn-outline-secondary reset-btn" data-module="flex"><i class="bi bi-arrow-counterclockwise"></i> Reset</button>
-                                <button class="btn btn-sm btn-accent complete-btn" data-module="flex"><i class="bi bi-check-lg"></i> Mark Complete</button>
-                            </div>
-                        </div>
-                        <div class="editor-wrapper"><div class="row g-3"><div class="col-md-6">
-                            <div class="code-editor-box"><div class="editor-tab"><i class="bi bi-code-slash"></i> HTML</div>
-                                <textarea class="code-editor" id="editor-flex" spellcheck="false"><div class="d-flex justify-content-center align-items-center gap-3 p-4 bg-dark rounded" style="min-height:120px;">
-  <div class="p-3 bg-primary rounded text-white">Box 1</div>
-  <div class="p-3 bg-success rounded text-white">Box 2</div>
-  <div class="p-3 bg-danger rounded text-white">Box 3</div>
-</div>
-
-<h6 class="mt-3">Try these changes:</h6>
-<ul>
-  <li>Change <code>justify-content-center</code> to <code>justify-content-between</code></li>
-  <li>Add <code>flex-column</code> to stack vertically</li>
-  <li>Try <code>flex-row-reverse</code> to reverse order</li>
-</ul></textarea>
-                            </div></div><div class="col-md-6"><div class="preview-box"><div class="editor-tab"><i class="bi bi-eye"></i> Preview</div>
-                            <iframe class="live-preview" id="preview-flex"></iframe>
-                        </div></div></div></div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Free Playground -->
-        <section class="module-section" id="playground">
-            <div class="container">
-                <div class="module-header">
-                    <span class="module-badge accent-badge">🎮 Sandbox</span>
-                    <h2><i class="bi bi-code-square text-accent"></i> Free Playground</h2>
-                    <p class="text-muted">Go wild! Write any HTML + Bootstrap code and see it come to life instantly.</p>
-                </div>
-                <div class="glass-card p-4">
-                    <div class="editor-wrapper"><div class="row g-3"><div class="col-md-6">
-                        <div class="code-editor-box">
-                            <div class="editor-tab"><i class="bi bi-code-slash"></i> HTML + Bootstrap</div>
-                            <textarea class="code-editor playground-editor" id="editor-playground" spellcheck="false"><div class="container py-4">
-  <nav class="navbar navbar-expand-lg bg-primary rounded mb-4" data-bs-theme="dark">
-    <div class="container-fluid">
-      <a class="navbar-brand" href="#">My App</a>
-      <div class="d-flex gap-2">
-        <button class="btn btn-outline-light btn-sm">Login</button>
-        <button class="btn btn-warning btn-sm">Sign Up</button>
-      </div>
-    </div>
-  </nav>
-
-  <div class="row g-4">
-    <div class="col-md-4">
-      <div class="card text-bg-dark border-primary">
-        <div class="card-body text-center">
-          <i class="bi bi-rocket-takeoff fs-1 text-primary"></i>
-          <h5 class="card-title mt-2">Fast</h5>
-          <p class="card-text small">Lightning quick load times.</p>
-        </div>
-      </div>
-    </div>
-    <div class="col-md-4">
-      <div class="card text-bg-dark border-success">
-        <div class="card-body text-center">
-          <i class="bi bi-shield-check fs-1 text-success"></i>
-          <h5 class="card-title mt-2">Secure</h5>
-          <p class="card-text small">Built with security first.</p>
-        </div>
-      </div>
-    </div>
-    <div class="col-md-4">
-      <div class="card text-bg-dark border-warning">
-        <div class="card-body text-center">
-          <i class="bi bi-phone fs-1 text-warning"></i>
-          <h5 class="card-title mt-2">Responsive</h5>
-          <p class="card-text small">Works on every device.</p>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="alert alert-info mt-4">
-    🎉 This is YOUR playground. Edit anything!
-  </div>
-</div></textarea>
-                        </div></div><div class="col-md-6"><div class="preview-box">
-                        <div class="editor-tab"><i class="bi bi-eye"></i> Preview</div>
-                        <iframe class="live-preview playground-preview" id="preview-playground"></iframe>
-                    </div></div></div></div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Challenges -->
-        <section class="module-section" id="challenges">
-            <div class="container">
-                <div class="module-header">
-                    <span class="module-badge accent-badge">🏆 Challenges</span>
-                    <h2><i class="bi bi-trophy text-accent"></i> Test Your Skills</h2>
-                    <p class="text-muted">Complete these challenges to prove you've mastered Bootstrap!</p>
-                </div>
-                <div class="row g-4" id="challengeList">
-                    <!-- Challenge 1 -->
                     <div class="col-md-6">
-                        <div class="glass-card challenge-card p-4" data-challenge="1">
-                            <div class="d-flex justify-content-between align-items-start mb-3">
-                                <span class="badge text-bg-success">Easy</span>
-                                <span class="challenge-status" id="challenge-status-1">⬜</span>
-                            </div>
+                        <div class="card bg-dark border-secondary p-4">
+                            <span class="badge text-bg-success mb-2" style="width:fit-content">Easy</span>
                             <h5>Challenge 1: Center a Heading</h5>
-                            <p class="text-muted small mb-3">Create a <code>&lt;h1&gt;</code> element with the text "Hello Bootstrap" and center it using a Bootstrap class.</p>
-                            <div class="code-editor-box compact">
-                                <div class="editor-tab"><i class="bi bi-code-slash"></i> Your Answer</div>
-                                <textarea class="code-editor challenge-editor" id="challenge-1" rows="3" spellcheck="false"></textarea>
+                            <p class="text-secondary small">Which Bootstrap class would you add to an
+                                <code>&lt;h1&gt;</code> to center it?</p>
+                            <div class="d-flex flex-wrap gap-2">
+                                <button class="btn btn-outline-light btn-sm challenge-option"
+                                    data-correct="false"><code>.text-left</code></button>
+                                <button class="btn btn-outline-light btn-sm challenge-option"
+                                    data-correct="true"><code>.text-center</code></button>
+                                <button class="btn btn-outline-light btn-sm challenge-option"
+                                    data-correct="false"><code>.center-text</code></button>
                             </div>
-                            <div class="preview-box compact mt-2">
-                                <div class="editor-tab"><i class="bi bi-eye"></i> Preview</div>
-                                <iframe class="live-preview challenge-preview" id="challenge-preview-1"></iframe>
-                            </div>
-                            <button class="btn btn-accent btn-sm mt-3 check-challenge" data-challenge="1">Check Answer <i class="bi bi-check-lg"></i></button>
-                            <div class="challenge-feedback mt-2" id="feedback-1"></div>
                         </div>
                     </div>
-                    <!-- Challenge 2 -->
                     <div class="col-md-6">
-                        <div class="glass-card challenge-card p-4" data-challenge="2">
-                            <div class="d-flex justify-content-between align-items-start mb-3">
-                                <span class="badge text-bg-success">Easy</span>
-                                <span class="challenge-status" id="challenge-status-2">⬜</span>
-                            </div>
+                        <div class="card bg-dark border-secondary p-4">
+                            <span class="badge text-bg-success mb-2" style="width:fit-content">Easy</span>
                             <h5>Challenge 2: Create a Danger Alert</h5>
-                            <p class="text-muted small mb-3">Create a Bootstrap alert with the danger style that says "Something went wrong!"</p>
-                            <div class="code-editor-box compact">
-                                <div class="editor-tab"><i class="bi bi-code-slash"></i> Your Answer</div>
-                                <textarea class="code-editor challenge-editor" id="challenge-2" rows="3" spellcheck="false"></textarea>
+                            <p class="text-secondary small">Which classes make a red danger alert?</p>
+                            <div class="d-flex flex-wrap gap-2">
+                                <button class="btn btn-outline-light btn-sm challenge-option"
+                                    data-correct="true"><code>.alert .alert-danger</code></button>
+                                <button class="btn btn-outline-light btn-sm challenge-option"
+                                    data-correct="false"><code>.danger .alert</code></button>
+                                <button class="btn btn-outline-light btn-sm challenge-option"
+                                    data-correct="false"><code>.warning .red</code></button>
                             </div>
-                            <div class="preview-box compact mt-2">
-                                <div class="editor-tab"><i class="bi bi-eye"></i> Preview</div>
-                                <iframe class="live-preview challenge-preview" id="challenge-preview-2"></iframe>
-                            </div>
-                            <button class="btn btn-accent btn-sm mt-3 check-challenge" data-challenge="2">Check Answer <i class="bi bi-check-lg"></i></button>
-                            <div class="challenge-feedback mt-2" id="feedback-2"></div>
                         </div>
                     </div>
-                    <!-- Challenge 3 -->
                     <div class="col-md-6">
-                        <div class="glass-card challenge-card p-4" data-challenge="3">
-                            <div class="d-flex justify-content-between align-items-start mb-3">
-                                <span class="badge text-bg-warning text-dark">Medium</span>
-                                <span class="challenge-status" id="challenge-status-3">⬜</span>
+                        <div class="card bg-dark border-secondary p-4">
+                            <span class="badge text-bg-warning text-dark mb-2" style="width:fit-content">Medium</span>
+                            <h5>Challenge 3: Two Equal Columns</h5>
+                            <p class="text-secondary small">What classes create two 50-50 columns inside a
+                                <code>.row</code>?</p>
+                            <div class="d-flex flex-wrap gap-2">
+                                <button class="btn btn-outline-light btn-sm challenge-option"
+                                    data-correct="false"><code>.col-12 + .col-12</code></button>
+                                <button class="btn btn-outline-light btn-sm challenge-option"
+                                    data-correct="true"><code>.col-6 + .col-6</code></button>
+                                <button class="btn btn-outline-light btn-sm challenge-option"
+                                    data-correct="false"><code>.col-50 + .col-50</code></button>
                             </div>
-                            <h5>Challenge 3: Two-Column Layout</h5>
-                            <p class="text-muted small mb-3">Create a row with two equal-width columns. Put "Left" in the first and "Right" in the second.</p>
-                            <div class="code-editor-box compact">
-                                <div class="editor-tab"><i class="bi bi-code-slash"></i> Your Answer</div>
-                                <textarea class="code-editor challenge-editor" id="challenge-3" rows="4" spellcheck="false"></textarea>
-                            </div>
-                            <div class="preview-box compact mt-2">
-                                <div class="editor-tab"><i class="bi bi-eye"></i> Preview</div>
-                                <iframe class="live-preview challenge-preview" id="challenge-preview-3"></iframe>
-                            </div>
-                            <button class="btn btn-accent btn-sm mt-3 check-challenge" data-challenge="3">Check Answer <i class="bi bi-check-lg"></i></button>
-                            <div class="challenge-feedback mt-2" id="feedback-3"></div>
                         </div>
                     </div>
-                    <!-- Challenge 4 -->
                     <div class="col-md-6">
-                        <div class="glass-card challenge-card p-4" data-challenge="4">
-                            <div class="d-flex justify-content-between align-items-start mb-3">
-                                <span class="badge text-bg-danger">Hard</span>
-                                <span class="challenge-status" id="challenge-status-4">⬜</span>
+                        <div class="card bg-dark border-secondary p-4">
+                            <span class="badge text-bg-danger mb-2" style="width:fit-content">Hard</span>
+                            <h5>Challenge 4: Responsive Layout</h5>
+                            <p class="text-secondary small">Which class means "full width on small, 4 columns on
+                                medium+"?</p>
+                            <div class="d-flex flex-wrap gap-2">
+                                <button class="btn btn-outline-light btn-sm challenge-option"
+                                    data-correct="false"><code>.col-4</code></button>
+                                <button class="btn btn-outline-light btn-sm challenge-option"
+                                    data-correct="true"><code>.col-12 .col-md-4</code></button>
+                                <button class="btn btn-outline-light btn-sm challenge-option"
+                                    data-correct="false"><code>.col-md-12-4</code></button>
                             </div>
-                            <h5>Challenge 4: Card with Button</h5>
-                            <p class="text-muted small mb-3">Create a Bootstrap card with a title "My Card", some text, and a primary button that says "Learn More".</p>
-                            <div class="code-editor-box compact">
-                                <div class="editor-tab"><i class="bi bi-code-slash"></i> Your Answer</div>
-                                <textarea class="code-editor challenge-editor" id="challenge-4" rows="5" spellcheck="false"></textarea>
-                            </div>
-                            <div class="preview-box compact mt-2">
-                                <div class="editor-tab"><i class="bi bi-eye"></i> Preview</div>
-                                <iframe class="live-preview challenge-preview" id="challenge-preview-4"></iframe>
-                            </div>
-                            <button class="btn btn-accent btn-sm mt-3 check-challenge" data-challenge="4">Check Answer <i class="bi bi-check-lg"></i></button>
-                            <div class="challenge-feedback mt-2" id="feedback-4"></div>
                         </div>
                     </div>
                 </div>
@@ -910,16 +1781,36 @@
         </section>
 
         <!-- Footer -->
-        <footer class="text-center py-5 mt-5">
-            <p class="text-muted mb-1">Built with ❤️ to help you learn Bootstrap</p>
-            <p class="text-muted small">Bootstrap Playground © 2026 — Keep experimenting!</p>
+        <footer class="text-center py-5 mt-5 border-top border-secondary">
+            <div class="container">
+                <h5 class="text-info mb-3"><i class="bi bi-bar-chart-fill"></i> Your Progress Dashboard</h5>
+                <div class="d-flex justify-content-center gap-4 flex-wrap mb-4">
+                    <div class="text-center p-3 bg-dark rounded border border-secondary" style="min-width:120px;">
+                        <div class="fs-3 fw-bold text-success" id="footerXP">0</div>
+                        <small class="text-secondary">Total XP</small>
+                    </div>
+                    <div class="text-center p-3 bg-dark rounded border border-secondary" style="min-width:120px;">
+                        <div class="fs-3 fw-bold text-warning" id="footerLevel">🌱</div>
+                        <small class="text-secondary">Level</small>
+                    </div>
+                    <div class="text-center p-3 bg-dark rounded border border-secondary" style="min-width:120px;">
+                        <div class="fs-3 fw-bold text-danger" id="footerStreak">0</div>
+                        <small class="text-secondary">Streak</small>
+                    </div>
+                    <div class="text-center p-3 bg-dark rounded border border-secondary" style="min-width:120px;">
+                        <div class="fs-3 fw-bold text-info" id="footerDone">0%</div>
+                        <small class="text-secondary">Completed</small>
+                    </div>
+                </div>
+                <p class="text-secondary mb-1">Built with ❤️ to help you learn Bootstrap</p>
+                <p class="text-secondary small">Bootstrap Playground © 2026 — CAP916: Front-End Web UI Frameworks &amp;
+                    Tools</p>
+            </div>
         </footer>
     </main>
-
-    <!-- Confetti Canvas -->
-    <canvas id="confettiCanvas"></canvas>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="script.js"></script>
 </body>
+
 </html>
